@@ -11,13 +11,16 @@
 #include <sstream>
 #include <string>
 #include "../src/Vertex.h"
+#include "../src/Shape.h"
 
 using namespace std;
 using namespace tinyxml2;
 
-float angleX = 1.0f, angleY = 1.0f;
 int mode = GL_LINE;
 
+vector<Shape*> shapes;
+
+float angleX = 1.0f, angleY = 1.0f;
 float ex = 0.0f, ey = 0.0f , ez = 0.0f;
 float ax = 0.0f, ay = 0.0f , az = 0.0f;
 
@@ -75,7 +78,6 @@ void renderScene(void) {
     // put the geometric transformations here
     glEnable(GL_CULL_FACE);
     glPolygonMode(GL_FRONT_AND_BACK, mode);
--+
 
     glRotatef(angleX, 0,1,0);
     glRotatef(angleY, 0,0,1);
@@ -95,9 +97,21 @@ void renderScene(void) {
         glVertex3f(0.0, 0.0, 5.0 + az);
     glEnd();
 
+    // Draw shapes
+    int index = 0;
+    float x =0, y = 0, z = 0;
 
-    // put drawing instructions here
-
+    for (auto &shape : shapes) {
+        vector<Vertex*> v = shape->getVertexes();
+        glBegin(GL_TRIANGLES);
+        for (auto &vert : v) {
+            x = vert->getX();
+            y = vert->getY();
+            z = vert->getZ();
+            glVertex3d(x,y,z);
+        }
+        glEnd();
+    }
 
     // End of frame
     glutSwapBuffers();
@@ -163,7 +177,7 @@ vector<Vertex*> read_file(string fileName){
     string line;
     string pathToFile = "../Generator/" + fileName;
 
-    ifstream file(fileName);
+    ifstream file(pathToFile);
 
     if (!file.fail()){
         while(getline(file, line)){
@@ -174,6 +188,8 @@ vector<Vertex*> read_file(string fileName){
     else {
         cout << "Failed to open file " << fileName << "." << endl;
     }
+
+    return result;
 }
 
 int main(int argc, char **argv) {
@@ -188,7 +204,8 @@ int main(int argc, char **argv) {
         files3d = parseXML(argv[1]);
         if(!files3d.empty()){
             for (auto &file : files3d) {
-                cout << file << endl;
+                vector<Vertex*> vec = read_file(file);
+                shapes.push_back(new Shape(vec));
             }
         }
         else{

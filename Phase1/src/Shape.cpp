@@ -3,6 +3,10 @@
 
 using std::vector;
 
+Shape::Shape(vector<Vertex*> list){
+    vertexes = list;
+}
+
 void Shape::pushVertex(Vertex *v) {
     vertexes.push_back(v);
 }
@@ -21,4 +25,8 @@ void Shape::reverse() {
 
 int Shape::getSize() {
     return vertexes.size();
+}
+
+vector<Vertex*> Shape::getVertexes(){
+    return vertexes;
 }

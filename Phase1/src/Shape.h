@@ -1,22 +1,24 @@
 #ifndef _SHAPE_H
 #define _SHAPE_H
 
-#include<vector>
+#include <string>
+#include <vector>
 #include "Vertex.h"
 
-class Shape {
+using namespace std;
 
-    private:
-        std::vector<Vertex*> vertexes;
+class Shape{
 
-    public:
-        void pushVertex(Vertex* v);
-        void pushShape(Shape * s);
-        std::vector<float> *getVertexes();
-        void getVertex(int i, Vertex** v);
-        void reverse();
-        int getSize();
+    vector<Vertex*> vertexes;
+
+public:
+    explicit Shape(vector<Vertex*>);
+    void pushVertex(Vertex* v);
+    void pushShape(Shape* s);
+    void getVertex(int i, Vertex** v);
+    void reverse();
+    int getSize();
+    vector<Vertex*> getVertexes();
 };
-
 
 #endif
