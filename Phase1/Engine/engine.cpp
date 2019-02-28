@@ -113,10 +113,9 @@ vector<string> parseXML(char* fileName){
     XMLDocument docXML;
     XMLElement *root, *element;
 
-    if(docXML.LoadFile(fileName) == 0){
+    if(!(docXML.LoadFile(fileName))){
         root = docXML.FirstChildElement("scene");
-        element = root->FirstChildElement("model");
-        for(; element; element = element->NextSiblingElement()){
+        for(element = root->FirstChildElement("model"); element; element = element->NextSiblingElement()){
             if(!strcmp(element->Name(),"model")){
                 modelName = element->Attribute("file");
                 files.push_back(modelName);
@@ -130,7 +129,6 @@ vector<string> parseXML(char* fileName){
 
     return files;
 }
-
 
 
 int main(int argc, char **argv) {
