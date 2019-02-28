@@ -5,7 +5,7 @@
 #endif
 #define _USE_MATH_DEFINES
 #include <vector>
-#include "./tinyxml2.h"
+#include "tinyxml2.h"
 #include <math.h>
 #include <iostream>
 #include <fstream>
@@ -15,6 +15,19 @@ using namespace std;
 using namespace tinyxml2;
 
 float angleX = 1.0f, angleY = 1.0f;
+
+void help_menu(){
+    cout<<"##############################" << endl;
+    cout<<"#          HELP MENU         #" << endl;
+    cout<<"#    Usage:                  #" << endl;
+    cout<<"#    ./engine path_to_XML    #" << endl;
+    cout<<"#    KeyBinds:               #" << endl;
+    cout<<"#       w - Rotate up        #" << endl;
+    cout<<"#       s - Rotate down      #" << endl;
+    cout<<"#       a - Rotate left      #" << endl;
+    cout<<"#       d - Rotate right     #" << endl;
+    cout<<"##############################" << endl;
+}
 
 void changeSize(int w, int h) {
 
@@ -54,8 +67,23 @@ void renderScene(void) {
               0.0f,1.0f,0.0f);
 
     // put the geometric transformations here
-    glRotatef(angle, 0,1,0);
-    glTranslatef(tx,ty,tz);
+    glRotatef(angleX, 0,1,0);
+    glRotatef(angleY, 0,0,1);
+
+    //Draw axis
+    glBegin(GL_LINES);
+        glColor3f(1.0, 0.0, 0.0);
+        glVertex3f(0.0, 0.0, 0.0);
+        glVertex3f(5.0, 0.0, 0.0);
+
+        glColor3f(0.0, 1.0, 0.0);
+        glVertex3f(0.0, 0.0, 0.0);
+        glVertex3f(0.0, 5.0, 0.0);
+
+        glColor3f(0.0, 0.0, 1.0);
+        glVertex3f(0.0, 0.0, 0.0);
+        glVertex3f(0.0, 0.0, 5.0);
+    glEnd();
 
     // End of frame
     glutSwapBuffers();
@@ -78,7 +106,30 @@ void arrowKeys(unsigned char key, int x, int y){
     glutPostRedisplay();
 }
 
+vector<string> parseXML(char* fileName){
+    string modelName;
+    vector<string> files;
 
+    XMLDocument docXML;
+    XMLElement *root, *element;
+
+    if(docXML.LoadFile(fileName) == 0){
+        root = docXML.FirstChildElement("scene");
+        element = root->FirstChildElement("model");
+        for(; element; element = element->NextSiblingElement()){
+            if(!strcmp(element->Name(),"model")){
+                modelName = element->Attribute("file");
+                files.push_back(modelName);
+                cout << "Model found: " << modelName << "." << endl;
+            }
+        }
+    }
+    else{
+        cout << "XML file \"" << fileName << "\" not found!" << endl;
+    }
+
+    return files;
+}
 
 
 
@@ -88,18 +139,20 @@ int main(int argc, char **argv) {
     string line;
 
     if(argc != 2){
-        std::cout << "Error" << std::endl;
-        //TODO add help
+        help_menu();
     }
     else {
-        files = find_files(argv[1]);
-        if(files.size()){
+        files = parseXML(argv[1]);
+        if(!files.empty()){
             for(vector<string>::const_iterator i = files.begin(); i != files.end(); ++i){
-                //TODO
+                cout << *i << endl;
             }
         }
-        else return 0;
+        else{
+            return 0;
+        }
     }
+
     // init GLUT and the window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
@@ -114,7 +167,6 @@ int main(int argc, char **argv) {
     // put here the registration of the keyboard callbacks
     glutKeyboardFunc( arrowKeys );
 
-
     //  OpenGL settings
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -122,5 +174,5 @@ int main(int argc, char **argv) {
     // enter GLUT's main cycle
     glutMainLoop();
 
-    return 1;
+    return 0;
 }

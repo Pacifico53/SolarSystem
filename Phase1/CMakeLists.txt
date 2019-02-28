@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_FLAGS "-Wall -o3 -g")
 
 project(Engine)
-set(ENGINE_FILES Engine/engine.cpp Engine/engine.h)
+set(ENGINE_FILES Engine/engine.cpp Engine/engine.h Engine/tinyxml2.cpp)
 find_package(GLUT REQUIRED)
 find_package(OpenGL REQUIRED)
 
