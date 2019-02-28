@@ -3,13 +3,14 @@
 #else
 #include <GL/glut.h>
 #endif
-#define _USE_MATH_DEFINES
 #include <vector>
 #include "tinyxml2.h"
 #include <math.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <string>
+#include "../src/Vertex.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -140,7 +141,7 @@ vector<string> parseXML(char* fileName){
     XMLDocument docXML;
     XMLElement *root, *element;
 
-    if(!(docXML.LoadFile(fileName))){
+    if((docXML.LoadFile(fileName)) == 0){
         root = docXML.FirstChildElement("scene");
         for(element = root->FirstChildElement("model"); element; element = element->NextSiblingElement()){
             if(!strcmp(element->Name(),"model")){
@@ -157,20 +158,37 @@ vector<string> parseXML(char* fileName){
     return files;
 }
 
+vector<Vertex*> read_file(string fileName){
+    vector<Vertex*> result;
+    string line;
+    string pathToFile = "../Generator/" + fileName;
+
+    ifstream file(fileName);
+
+    if (!file.fail()){
+        while(getline(file, line)){
+            Vertex *v = new Vertex(line);
+            result.push_back(v);
+        }
+    }
+    else {
+        cout << "Failed to open file " << fileName << "." << endl;
+    }
+}
 
 int main(int argc, char **argv) {
 
-    vector<string> files;
+    vector<string> files3d;
     string line;
 
     if(argc != 2){
         help_menu();
     }
     else {
-        files = parseXML(argv[1]);
-        if(!files.empty()){
-            for(vector<string>::const_iterator i = files.begin(); i != files.end(); ++i){
-                cout << *i << endl;
+        files3d = parseXML(argv[1]);
+        if(!files3d.empty()){
+            for (auto &file : files3d) {
+                cout << file << endl;
             }
         }
         else{

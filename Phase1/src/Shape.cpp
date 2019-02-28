@@ -1,24 +1,24 @@
 #include <algorithm>
-#include "shape.h"
+#include "Shape.h"
 
 using std::vector;
 
-void shape::pushVertex(vertex *v) {
+void Shape::pushVertex(Vertex *v) {
     vertexes.push_back(v);
 }
 
-void shape::pushShape(shape *s) {
+void Shape::pushShape(Shape *s) {
     vertexes.insert(vertexes.end(),s->vertexes.begin(),s->vertexes.end());
 }
 
-void shape::getVertex(int i, vertex **v) {
+void Shape::getVertex(int i, Vertex **v) {
     *v = vertexes.at(i);
 }
 
-void shape::reverse() {
+void Shape::reverse() {
     std::reverse(vertexes.begin(),vertexes.end());
 }
 
-int shape::getSize() {
+int Shape::getSize() {
     return vertexes.size();
 }
