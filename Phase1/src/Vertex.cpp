@@ -1,18 +1,18 @@
-#include "vertex.h"
+#include "Vertex.h"
 
-vertex::vertex(){
+Vertex::Vertex(){
     x=0;
     y=0;
     z=0;
 }
 
-vertex::vertex(float xx, float yy, float zz){
+Vertex::Vertex(float xx, float yy, float zz){
     x = xx;
     y = yy;
     z = zz;
 }
 
-vertex::vertex(std::string str){
+Vertex::Vertex(std::string str){
     size_t pos;
 
     x = std::stof(str,&pos);
@@ -22,14 +22,14 @@ vertex::vertex(std::string str){
     z = std::stof(str,&pos);
 }
 
-float vertex::getX(){
+float Vertex::getX(){
     return x;
 }
 
-float vertex::getY(){
+float Vertex::getY(){
     return y;
 }
 
-float vertex::getZ(){
+float Vertex::getZ(){
     return z;
 }

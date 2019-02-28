@@ -3,7 +3,7 @@
 
 #include <string>
 
-class vertex {
+class Vertex {
 
     private:
         float x;
@@ -11,10 +11,10 @@ class vertex {
         float z;
 
     public:
-        vertex();
-        vertex(float xx, float yy, float zz);
-        vertex(const vertex *v);
-        vertex(std::string str);
+        Vertex();
+        Vertex(float xx, float yy, float zz);
+        Vertex(const Vertex *v);
+        Vertex(std::string str);
         float getX();
         float getY();
         float getZ();
