@@ -15,6 +15,11 @@ using namespace std;
 using namespace tinyxml2;
 
 float angleX = 1.0f, angleY = 1.0f;
+int mode = GL_LINE;
+
+float ex = 0.0f, ey = 0.0f , ez = 0.0f;
+float ax = 0.0f, ay = 0.0f , az = 0.0f;
+
 
 void help_menu(){
     cout<<"##############################" << endl;
@@ -62,11 +67,15 @@ void renderScene(void) {
 
     // set the camera
     glLoadIdentity();
-    gluLookAt(5.0,5.0,5.0,
+    gluLookAt(5.0 + ex , 5.0 + ey , 5.0 + ez ,
               0.0,0.0,0.0,
               0.0f,1.0f,0.0f);
 
     // put the geometric transformations here
+    glEnable(GL_CULL_FACE);
+    glPolygonMode(GL_FRONT_AND_BACK, mode);
+-+
+
     glRotatef(angleX, 0,1,0);
     glRotatef(angleY, 0,0,1);
 
@@ -74,16 +83,20 @@ void renderScene(void) {
     glBegin(GL_LINES);
         glColor3f(1.0, 0.0, 0.0);
         glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(5.0, 0.0, 0.0);
+        glVertex3f(5.0 + ax, 0.0, 0.0);
 
         glColor3f(0.0, 1.0, 0.0);
         glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.0, 5.0, 0.0);
+        glVertex3f(0.0, 5.0 + ay, 0.0);
 
         glColor3f(0.0, 0.0, 1.0);
         glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.0, 0.0, 5.0);
+        glVertex3f(0.0, 0.0, 5.0 + az);
     glEnd();
+
+
+    // put drawing instructions here
+
 
     // End of frame
     glutSwapBuffers();
@@ -101,6 +114,20 @@ void arrowKeys(unsigned char key, int x, int y){
         case 'a': angleX-=5.0f;
             break;
         case 'd': angleX+=5.0f;
+            break;
+        case 'j': mode = GL_FILL;
+            break;
+        case 'k': mode = GL_LINE;
+            break;
+        case 'l': mode = GL_POINT;
+            break;
+        case '+': ex -= 2.0f; ey -= 2.0f; ez -= 2.0f;
+            break;
+        case '-': ex += 2.0f; ey += 2.0f; ez += 2.0f;
+            break;
+        case 'm': ax += 2.0f; ay += 2.0f; az += 2.0f;
+            break;
+        case 'n': ax -= 2.0f; ay -= 2.00f; az -= 2.0f;
             break;
     }
     glutPostRedisplay();
