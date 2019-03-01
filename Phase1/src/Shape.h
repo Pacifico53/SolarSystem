@@ -12,6 +12,7 @@ class Shape{
     vector<Vertex*> vertexes;
 
 public:
+    explicit Shape();
     explicit Shape(vector<Vertex*>);
     void pushVertex(Vertex* v);
     void pushShape(Shape* s);
@@ -19,6 +20,7 @@ public:
     void reverse();
     int getSize();
     vector<Vertex*> getVertexes();
+    virtual ~Shape(void);
 };
 
 #endif

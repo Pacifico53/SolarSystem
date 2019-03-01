@@ -3,6 +3,8 @@
 
 using std::vector;
 
+Shape::Shape(){};
+
 Shape::Shape(vector<Vertex*> list){
     vertexes = list;
 }
@@ -29,5 +31,9 @@ int Shape::getSize() {
 
 vector<Vertex*> Shape::getVertexes(){
     return vertexes;
+}
+
+Shape::~Shape(void){
+
 }
 

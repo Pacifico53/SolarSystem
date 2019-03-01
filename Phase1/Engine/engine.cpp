@@ -175,7 +175,7 @@ vector<string> parseXML(char* fileName){
 vector<Vertex*> read_file(string fileName){
     vector<Vertex*> result;
     string line;
-    string pathToFile = "../Generator/" + fileName;
+    string pathToFile = "../files3d/" + fileName;
 
     ifstream file(pathToFile);
 
