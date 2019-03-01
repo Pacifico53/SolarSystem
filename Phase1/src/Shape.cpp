@@ -30,3 +30,4 @@ int Shape::getSize() {
 vector<Vertex*> Shape::getVertexes(){
     return vertexes;
 }
+

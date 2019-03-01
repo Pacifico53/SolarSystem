@@ -1,5 +1,6 @@
 #include "../src/Vertex.h"
 #include "../src/Shape.h"
+#include "models.h"
 
 #include <cstring>
 #include <fstream>
@@ -32,8 +33,8 @@ void generatePlane(char* s, char* f_path){
     float size = atof(s);
     ofstream file;
 
-    //Shape* p = createPlane(size);
-    //writeFile(p,f_path);
+    Shape* p = createPlane(size);
+    writeFile(p,f_path);
 }
 
 void writeFile(Shape* s, string f_path){

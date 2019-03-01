@@ -2,9 +2,9 @@
 #define _MODELS_H
 
 
-class models {
+#include "../src/Shape.h"
 
-};
+Shape* createPlane(float size);
 
 
 #endif

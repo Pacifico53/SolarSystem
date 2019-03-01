@@ -9,7 +9,7 @@ find_package(GLUT REQUIRED)
 find_package(OpenGL REQUIRED)
 
 project(Generator)
-set(GENERATOR_FILES Generator/generator.cpp Generator/models.cpp Generator/models.h)
+set(GENERATOR_FILES Generator/generator.cpp Generator/models.cpp Generator/models.h src/Vertex.cpp src/Vertex.h src/Shape.cpp src/Shape.h)
 
 add_executable(generator ${GENERATOR_FILES})
 
