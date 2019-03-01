@@ -17,11 +17,12 @@ void generateCone(char* r, char* h, char* sl, char* st,char * f_path);
 int main(int argc, char** argv){
     if (argc == 1) printGuide();
         // argv[1] = plane | argv[2] = size | argv[3] = file path
-    else if (!(strcmp(argv[1],"plane")) && (argc == 4))
-        generatePlane(argv[2],argv[3]);
-    else if (!(strcmp(argv[1],"cone")) && (argc == 7))
-        generateCone(argv[2],argv[3],argv[4],argv[5],argv[6]);
-
+    else {
+        if (!(strcmp(argv[1], "plane")) && (argc == 4))
+            generatePlane(argv[2], argv[3]);
+        else if (!(strcmp(argv[1], "cone")) && (argc == 7))
+            generateCone(argv[2], argv[3], argv[4], argv[5], argv[6]);
+    }
 
 
 

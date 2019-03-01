@@ -11,10 +11,17 @@ Shape* createPlane(float size){
     plane->pushVertex(new Vertex(half,0,-half));
     plane->pushVertex(new Vertex(-half,0,-half));
 
-
     plane->pushVertex(new Vertex(half,0,half));
     plane->pushVertex(new Vertex(-half,0,-half));
     plane->pushVertex(new Vertex(-half,0,half));
+
+    plane->pushVertex(new Vertex(half,0,half));
+    plane->pushVertex(new Vertex(-half,0,-half));
+    plane->pushVertex(new Vertex(half,0,-half));
+
+    plane->pushVertex(new Vertex(half,0,half));
+    plane->pushVertex(new Vertex(-half,0,half));
+    plane->pushVertex(new Vertex(-half,0,-half));
 
 
     return plane;
