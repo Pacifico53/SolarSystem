@@ -26,16 +26,26 @@ float ax = 0.0f, ay = 0.0f , az = 0.0f;
 
 
 void help_menu(){
-    cout<<"##############################" << endl;
-    cout<<"#          HELP MENU         #" << endl;
-    cout<<"#    Usage:                  #" << endl;
-    cout<<"#    ./engine path_to_XML    #" << endl;
-    cout<<"#    KeyBinds:               #" << endl;
-    cout<<"#       w - Rotate up        #" << endl;
-    cout<<"#       s - Rotate down      #" << endl;
-    cout<<"#       a - Rotate left      #" << endl;
-    cout<<"#       d - Rotate right     #" << endl;
-    cout<<"##############################" << endl;
+    cout<<"################################" << endl;
+    cout<<"#          HELP MENU           #" << endl;
+    cout<<"#    Usage:                    #" << endl;
+    cout<<"#    ./engine path_to_XML      #" << endl;
+    cout<<"#                              #" << endl;
+    cout<<"#    KeyBinds:                 #" << endl;
+    cout<<"#       w - Rotate up          #" << endl;
+    cout<<"#       s - Rotate down        #" << endl;
+    cout<<"#       a - Rotate left        #" << endl;
+    cout<<"#                              #" << endl;
+    cout<<"#       j - Fill Mode          #" << endl;
+    cout<<"#       k - Line Mode          #" << endl;
+    cout<<"#       l - Point Mode         #" << endl;
+    cout<<"#                              #" << endl;
+    cout<<"#      '-' - Move Cam Back     #" << endl;
+    cout<<"#      '+' - Move Cam In       #" << endl;
+    cout<<"#                              #" << endl;
+    cout<<"#       m - Make axis longer   #" << endl;
+    cout<<"#       n - Make axis smaller  #" << endl;
+    cout<<"################################" << endl;
 }
 
 void changeSize(int w, int h) {
@@ -98,11 +108,15 @@ void renderScene(void) {
     glEnd();
 
     // Draw shapes
-    int index = 0;
     float x =0, y = 0, z = 0;
+    float r = 0, g = 0, b = 0;
 
     for (auto &shape : shapes) {
         vector<Vertex*> v = shape->getVertexes();
+        r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        g = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        glColor3f(r,g,b);
         glBegin(GL_TRIANGLES);
         for (auto &vert : v) {
             x = vert->getX();
@@ -175,7 +189,7 @@ vector<string> parseXML(char* fileName){
 vector<Vertex*> read_file(string fileName){
     vector<Vertex*> result;
     string line;
-    string pathToFile = "../Generator/" + fileName;
+    string pathToFile = "../files3d/" + fileName;
 
     ifstream file(pathToFile);
 
@@ -196,6 +210,7 @@ int main(int argc, char **argv) {
 
     vector<string> files3d;
     string line;
+    srand (static_cast <unsigned> (time(0)));
 
     if(argc != 2){
         help_menu();
