@@ -45,8 +45,9 @@ Shape* createCone(float radius, float height, int slices, int stacks){
     for(i = 0; i < stacks; i++){
 
         for(int j = 0; j < slices; j++){
+
             a = j * h_angle;
-            n_radius = radius - v_angle;
+            n_radius = radius - r_angle;
 
             cone->pushVertex(new Vertex(radius*cos(a),b,radius*sin(a)));
             cone->pushVertex(new Vertex(n_radius*cos(a),b+v_angle,n_radius*sin(a)));
@@ -60,8 +61,8 @@ Shape* createCone(float radius, float height, int slices, int stacks){
 
         }
 
-        radius -= v_angle;
-        b += r_angle;
+        radius -= r_angle;
+        b += v_angle;
     }
 
     return cone;
