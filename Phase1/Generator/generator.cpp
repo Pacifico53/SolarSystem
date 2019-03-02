@@ -57,11 +57,11 @@ void gen_menu(){
     cout<<"#     ./generate <shape> [options] <file>           #" << endl;
     cout<<"#                                                   #" << endl;
     cout<<"#     Shapes & Options:                             #" << endl;
-    cout<<"#\t-> plane <size>                                 #" << endl;
-    cout<<"#\t-> box <width> <height> <length> <divisions>    #" << endl;
-    cout<<"#\t-> sphere <radius> <slices> <stacks>            #" << endl;
-    cout<<"#\t-> cone <radius> <height> <slices> <stacks>     #" << endl;
-    cout<<"#\t-> cylinder <radius> <height> <slices> <stacks> #" << endl;
+    cout<<"#\t-> plane <size>                                  #" << endl;
+    cout<<"#\t-> box <width> <height> <length> <divisions>     #" << endl;
+    cout<<"#\t-> sphere <radius> <slices> <stacks>             #" << endl;
+    cout<<"#\t-> cone <radius> <height> <slices> <stacks>      #" << endl;
+    cout<<"#\t-> cylinder <radius> <height> <slices>           #" << endl;
     cout<<"#####################################################" << endl;
 }
 
@@ -99,9 +99,9 @@ void generateBox(char* x, char* y, char* z, char* n, char* f_path){
 
 void generateCylinder(char* r, char* h, char* sl, char* st, char * f_path){
     float radius = atof(r), height = atof(h);
-    int slices = atoi(sl), stacks = atoi(st);
+    int slices = atoi(sl);
     ofstream file;
-    Shape* c = createCylinder(radius,height,slices,stacks);
+    Shape* c = createCylinder(radius,height,slices);
     writeFile(c,f_path);
 }
 
