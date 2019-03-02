@@ -200,5 +200,4 @@ Shape* createCylinder(float radius, float height, int slices, int stacks){
     }
 
     return cone;
-
 }
