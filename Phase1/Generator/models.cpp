@@ -25,7 +25,6 @@ Shape* createPlane(float size){
 
 
     return plane;
-
 }
 
 
@@ -92,8 +91,6 @@ Shape* createSphere(float radius, int slices, int stacks){
         }
 
     }
-
-
 
     return sphere;
 }
@@ -165,11 +162,7 @@ Shape* createBox(float x, float y, float z, int nd){
             box->pushVertex(new Vertex(x - (i * shiftX),-y,(z-shiftZ) - (j * shiftZ)));
             box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),-y,z - (j * shiftZ)));
             box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),-y,(z-shiftZ) - (j * shiftZ)));
-
-
-
         }
     }
     return box;
-
 }

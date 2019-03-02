@@ -4,6 +4,7 @@
 
 #include <cstring>
 #include <fstream>
+#include <iostream>
 
 using std::ofstream;
 using std::string;
@@ -21,14 +22,26 @@ int main(int argc, char** argv){
     if (argc == 1) printGuide();
         // argv[1] = plane | argv[2] = size | argv[3] = file path
     else {
-        if (!(strcmp(argv[1], "plane")) && (argc == 4))
+        if (!(strcmp(argv[1], "plane")) && (argc == 4)) {
+            std::cout << "Generating plane..." << std::endl;
             generatePlane(argv[2], argv[3]);
-        else if (!(strcmp(argv[1], "cone")) && (argc == 7))
+            std::cout << "Done!" << std::endl;
+        }
+        else if (!(strcmp(argv[1], "cone")) && (argc == 7)) {
+            std::cout << "Generating cone..." << std::endl;
             generateCone(argv[2], argv[3], argv[4], argv[5], argv[6]);
-        else if (!(strcmp(argv[1],"sphere")) && (argc == 6))
-            generateSphere(argv[2],argv[3],argv[4],argv[5]);
-        else if (!(strcmp(argv[1],"box")) && (argc = 7))
-            generateBox(argv[2],argv[3],argv[4],argv[5],argv[6]);
+            std::cout << "Done!" << std::endl;
+        }
+        else if (!(strcmp(argv[1],"sphere")) && (argc == 6)) {
+            std::cout << "Generating sphere..." << std::endl;
+            generateSphere(argv[2], argv[3], argv[4], argv[5]);
+            std::cout << "Done!" << std::endl;
+        }
+        else if (!(strcmp(argv[1],"box")) && (argc = 7)) {
+            std::cout << "Generating box..." << std::endl;
+            generateBox(argv[2], argv[3], argv[4], argv[5], argv[6]);
+            std::cout << "Done!" << std::endl;
+        }
     }
 
 

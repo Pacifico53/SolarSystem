@@ -24,6 +24,10 @@ float angleX = 1.0f, angleY = 1.0f;
 float ex = 0.0f, ey = 0.0f , ez = 0.0f;
 float ax = 0.0f, ay = 0.0f , az = 0.0f;
 
+//Red color
+float ra = 0.843f, ga = 0.337f, ba = 0.337f;
+//Greenish color
+float rb = 0.5f, gb = 0.823f, bb = 0.5f;
 
 void help_menu(){
     cout<<"################################" << endl;
@@ -109,13 +113,17 @@ void renderScene(void) {
 
     // Draw shapes
     float x =0, y = 0, z = 0;
-    float r = 0, g = 0, b = 0;
+    float r = 0.29f, g = 0.525f, b = 0.729f;
+    int i = 0;
 
     for (auto &shape : shapes) {
         vector<Vertex*> v = shape->getVertexes();
-        r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        g = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-        b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+        if (i%3 == 1){
+            r = ra; g = ga; b = ba;
+        }
+        else if(i%3 == 2){
+            r = rb; g = gb; b = bb;
+        }
         glColor3f(r,g,b);
         glBegin(GL_TRIANGLES);
         for (auto &vert : v) {
@@ -125,6 +133,7 @@ void renderScene(void) {
             glVertex3d(x,y,z);
         }
         glEnd();
+        i++;
     }
 
     // End of frame
@@ -210,7 +219,6 @@ int main(int argc, char **argv) {
 
     vector<string> files3d;
     string line;
-    srand (static_cast <unsigned> (time(0)));
 
     if(argc != 2){
         help_menu();
