@@ -16,10 +16,12 @@
 using namespace std;
 using namespace tinyxml2;
 
+//This is to be able to change the mode with keybinds
 int mode = GL_LINE;
 
 vector<Shape*> shapes;
 
+//Camera movement variables
 float angleX = 1.0f, angleY = 1.0f;
 float ex = 0.0f, ey = 0.0f , ez = 0.0f;
 float ax = 0.0f, ay = 0.0f , az = 0.0f;
@@ -115,6 +117,9 @@ void renderScene(void) {
 
     for (auto &shape : shapes) {
         vector<Vertex*> v = shape->getVertexes();
+
+        //Checks if there is already saved rgb values for given shape
+        //if not, generates random ones and saves them
         if (colors.size() > i){
             r = colors.at(i);
             g = colors.at(i+1);
@@ -128,6 +133,7 @@ void renderScene(void) {
             colors.push_back(g);
             colors.push_back(b);
         }
+        i+=3;
 
         glColor3f(r,g,b);
         glBegin(GL_TRIANGLES);
@@ -138,7 +144,6 @@ void renderScene(void) {
             glVertex3d(x,y,z);
         }
         glEnd();
-        i+=3;
     }
 
     // End of frame
@@ -148,7 +153,7 @@ void renderScene(void) {
 
 
 // write function to process keyboard events
-void arrowKeys(unsigned char key, int x, int y){
+void keyBinds(unsigned char key, int x, int y){
     switch(key){
         case 'w': angleY+=5.0f;
             break;
@@ -176,6 +181,7 @@ void arrowKeys(unsigned char key, int x, int y){
     glutPostRedisplay();
 }
 
+//Parses through the xml file and returns a vector of all the 3d files/shapes
 vector<string> parseXML(char* fileName){
     string modelName;
     vector<string> files;
@@ -200,6 +206,7 @@ vector<string> parseXML(char* fileName){
     return files;
 }
 
+//Reads the .3d file and returns a vector of all the vertexes found
 vector<Vertex*> read_file(string fileName){
     vector<Vertex*> result;
     string line;
@@ -223,7 +230,7 @@ vector<Vertex*> read_file(string fileName){
 int main(int argc, char **argv) {
     //Seeds the rng
     srand (static_cast <unsigned> (time(nullptr)));
-    
+
     vector<string> files3d;
     string line;
 
@@ -255,7 +262,7 @@ int main(int argc, char **argv) {
     glutReshapeFunc(changeSize);
 
     // put here the registration of the keyboard callbacks
-    glutKeyboardFunc( arrowKeys );
+    glutKeyboardFunc( keyBinds );
 
     //  OpenGL settings
     glEnable(GL_DEPTH_TEST);
