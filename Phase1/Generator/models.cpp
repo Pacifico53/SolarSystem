@@ -155,7 +155,7 @@ Shape* createBox(float x, float y, float z, int nd){
 }
 
 Shape* createCylinder(float radius, float height, int slices){
-    float h_angle = 2 * M_PI / slices, a=0,b=0, n_radius = 0;
+    float h_angle = 2 * M_PI / slices, a=0;
     Shape* cone = new Shape();
     int i;
 

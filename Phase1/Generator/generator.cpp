@@ -97,7 +97,7 @@ void generateBox(char* x, char* y, char* z, char* n, char* f_path){
     writeFile(b,f_path);
 }
 
-void generateCylinder(char* r, char* h, char* sl, char* st, char * f_path){
+void generateCylinder(char* r, char* h, char* sl, char * f_path){
     float radius = atof(r), height = atof(h);
     int slices = atoi(sl);
     ofstream file;
