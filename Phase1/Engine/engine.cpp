@@ -30,7 +30,7 @@ vector<float> colors;
 
 void help_menu(){
     cout<<"################################" << endl;
-    cout<<"#          HELP MENU           #" << endl;
+    cout<<"#         Engine MENU          #" << endl;
     cout<<"#    Usage:                    #" << endl;
     cout<<"#    ./engine path_to_XML      #" << endl;
     cout<<"#                              #" << endl;

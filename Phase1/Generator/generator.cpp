@@ -9,18 +9,17 @@
 using std::ofstream;
 using std::string;
 
-void printGuide();
+void gen_menu();
 void writeFile(Shape* s, string f_path);
 void generatePlane(char* s, char* f_path);
 void generateCone(char* r, char* h, char* sl, char* st,char * f_path);
 void generateSphere(char* r, char* sl, char* st, char* f_path);
 void generateBox(char* x, char* y, char* z, char* n, char* f_path);
-
+void generateCylinder(char* r, char* h, char* sl, char* st,char * f_path);
 
 
 int main(int argc, char** argv){
-    if (argc == 1) printGuide();
-        // argv[1] = plane | argv[2] = size | argv[3] = file path
+    if (argc == 1) gen_menu();
     else {
         if (!(strcmp(argv[1], "plane")) && (argc == 4)) {
             std::cout << "Generating plane..." << std::endl;
@@ -37,20 +36,33 @@ int main(int argc, char** argv){
             generateSphere(argv[2], argv[3], argv[4], argv[5]);
             std::cout << "Done!" << std::endl;
         }
-        else if (!(strcmp(argv[1],"box")) && (argc = 7)) {
+        else if (!(strcmp(argv[1],"box")) && (argc == 7)) {
             std::cout << "Generating box..." << std::endl;
             generateBox(argv[2], argv[3], argv[4], argv[5], argv[6]);
             std::cout << "Done!" << std::endl;
         }
+        else if (!(strcmp(argv[1],"cylinder")) && (argc == 7)) {
+            std::cout << "Generating cylinder..." << std::endl;
+            generateCylinder(argv[2], argv[3], argv[4], argv[5], argv[6]);
+            std::cout << "Done!" << std::endl;
+        }
     }
-
-
-
     return 0;
 }
 
-void printGuide() {
-
+void gen_menu(){
+    cout<<"#####################################################" << endl;
+    cout<<"#                  Generator MENU                   #" << endl;
+    cout<<"#     Usage:                                        #" << endl;
+    cout<<"#     ./generate <shape> [options] <file>           #" << endl;
+    cout<<"#                                                   #" << endl;
+    cout<<"#     Shapes & Options:                             #" << endl;
+    cout<<"#\t-> plane <size>                                 #" << endl;
+    cout<<"#\t-> box <width> <height> <length> <divisions>    #" << endl;
+    cout<<"#\t-> sphere <radius> <slices> <stacks>            #" << endl;
+    cout<<"#\t-> cone <radius> <height> <slices> <stacks>     #" << endl;
+    cout<<"#\t-> cylinder <radius> <height> <slices> <stacks> #" << endl;
+    cout<<"#####################################################" << endl;
 }
 
 void generatePlane(char* s, char* f_path){
@@ -61,13 +73,12 @@ void generatePlane(char* s, char* f_path){
     writeFile(p,f_path);
 }
 
-void generateCone(char* r, char* h, char* sl, char* st,char * f_path){
+void generateCone(char* r, char* h, char* sl, char* st, char * f_path){
     float radius = atof(r), height = atof(h);
     int slices = atoi(sl), stacks = atoi(st);
     ofstream file;
     Shape* c = createCone(radius,height,slices,stacks);
     writeFile(c,f_path);
-
 }
 
 void generateSphere(char* r, char* sl, char* st, char* f_path){
@@ -80,10 +91,18 @@ void generateSphere(char* r, char* sl, char* st, char* f_path){
 
 void generateBox(char* x, char* y, char* z, char* n, char* f_path){
     float xx = atof(x), yy = atof(y), zz = atof (z);
-    int nd = atoi (n);
+    int nd = atoi(n);
     ofstream file;
     Shape* b = createBox(xx,yy,zz,nd);
     writeFile(b,f_path);
+}
+
+void generateCylinder(char* r, char* h, char* sl, char* st, char * f_path){
+    float radius = atof(r), height = atof(h);
+    int slices = atoi(sl), stacks = atoi(st);
+    ofstream file;
+    Shape* c = createCylinder(radius,height,slices,stacks);
+    writeFile(c,f_path);
 }
 
 void writeFile(Shape* s, string f_path){
@@ -103,21 +122,3 @@ void writeFile(Shape* s, string f_path){
     }
     file.close();
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
