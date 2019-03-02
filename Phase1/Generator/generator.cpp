@@ -13,6 +13,8 @@ void writeFile(Shape* s, string f_path);
 void generatePlane(char* s, char* f_path);
 void generateCone(char* r, char* h, char* sl, char* st,char * f_path);
 void generateSphere(char* r, char* sl, char* st, char* f_path);
+void generateBox(char* x, char* y, char* z, char* n, char* f_path);
+
 
 
 int main(int argc, char** argv){
@@ -25,6 +27,8 @@ int main(int argc, char** argv){
             generateCone(argv[2], argv[3], argv[4], argv[5], argv[6]);
         else if (!(strcmp(argv[1],"sphere")) && (argc == 6))
             generateSphere(argv[2],argv[3],argv[4],argv[5]);
+        else if (!(strcmp(argv[1],"box")) && (argc = 7))
+            generateBox(argv[2],argv[3],argv[4],argv[5],argv[6]);
     }
 
 
@@ -59,6 +63,14 @@ void generateSphere(char* r, char* sl, char* st, char* f_path){
     ofstream file;
     Shape* s = createSphere(radius,slices,stacks);
     writeFile(s,f_path);
+}
+
+void generateBox(char* x, char* y, char* z, char* n, char* f_path){
+    float xx = atof(x), yy = atof(y), zz = atof (z);
+    int nd = atoi (n);
+    ofstream file;
+    Shape* b = createBox(xx,yy,zz,nd);
+    writeFile(b,f_path);
 }
 
 void writeFile(Shape* s, string f_path){

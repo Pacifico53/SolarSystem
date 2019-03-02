@@ -97,3 +97,79 @@ Shape* createSphere(float radius, int slices, int stacks){
 
     return sphere;
 }
+
+Shape* createBox(float x, float y, float z, int nd){
+    Shape * box = new Shape();
+    float shiftX = x/nd, shiftY = y/nd, shiftZ = z/nd;
+    x = x/2;
+    y = y/2;
+    z = z/2;
+
+
+    for(int i=0;i<nd;i++){
+        for(int j=0;j<nd;j++){
+
+            //XY Front
+            box->pushVertex(new Vertex(x - (j*shiftX),y - (i*shiftY),z));
+            box->pushVertex(new Vertex((x-shiftX) - (j*shiftX) ,y - (i*shiftY),z));
+            box->pushVertex(new Vertex(x - (j*shiftX),(y-shiftY) - (i*shiftY),z));
+
+            box->pushVertex(new Vertex((x-shiftX) - (j*shiftX) ,y - (i*shiftY),z));
+            box->pushVertex(new Vertex((x-shiftX) - (j*shiftX) ,(y-shiftY) - (i*shiftY),z));
+            box->pushVertex(new Vertex(x - (j*shiftX) ,(y-shiftY) - (i*shiftY),z));
+
+            //XY Back
+            box->pushVertex(new Vertex(x - (j*shiftX),y - (i*shiftY),-z));
+            box->pushVertex(new Vertex(x - (j*shiftX),(y-shiftY) - (i*shiftY),-z));
+            box->pushVertex(new Vertex((x-shiftX) - (j*shiftX) ,y - (i*shiftY),-z));
+
+            box->pushVertex(new Vertex((x-shiftX) - (j*shiftX) ,y - (i*shiftY),-z));
+            box->pushVertex(new Vertex(x - (j*shiftX) ,(y-shiftY) - (i*shiftY),-z));
+            box->pushVertex(new Vertex((x-shiftX) - (j*shiftX) ,(y-shiftY) - (i*shiftY),-z));
+
+            //ZY Front
+            box->pushVertex(new Vertex(x, y - (i * shiftY),z - (j*shiftZ) ));
+            box->pushVertex(new Vertex(x, (y-shiftY) - (i * shiftY),(z-shiftZ) - (j*shiftZ) ));
+            box->pushVertex(new Vertex(x, y - (i * shiftY),(z-shiftZ) - (j*shiftZ)));
+
+
+            box->pushVertex(new Vertex(x, y - (i * shiftY),z - (j*shiftZ) ));
+            box->pushVertex(new Vertex(x, (y-shiftY) - (i * shiftY), z - (j * shiftZ)));
+            box->pushVertex(new Vertex(x, (y-shiftY) - (i * shiftY),(z-shiftZ) - (j*shiftZ) ));
+
+
+            //ZY Back
+            box->pushVertex(new Vertex(-x, y - (i * shiftY),z - (j*shiftZ) ));
+            box->pushVertex(new Vertex(-x, y - (i * shiftY),(z-shiftZ) - (j*shiftZ)));
+            box->pushVertex(new Vertex(-x, (y-shiftY) - (i * shiftY),(z-shiftZ) - (j*shiftZ) ));
+
+
+            box->pushVertex(new Vertex(-x, y - (i * shiftY),z - (j*shiftZ) ));
+            box->pushVertex(new Vertex(-x, (y-shiftY) - (i * shiftY),(z-shiftZ) - (j*shiftZ) ));
+            box->pushVertex(new Vertex(-x, (y-shiftY) - (i * shiftY), z - (j * shiftZ)));
+
+            //XZ Front
+            box->pushVertex(new Vertex(x - (i * shiftX),y,z - (j * shiftZ)));
+            box->pushVertex(new Vertex(x - (i * shiftX),y,(z-shiftZ) - (j * shiftZ)));
+            box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),y,z - (j * shiftZ)));
+
+            box->pushVertex(new Vertex(x - (i * shiftX),y,(z-shiftZ) - (j * shiftZ)));
+            box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),y,(z-shiftZ) - (j * shiftZ)));
+            box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),y,z - (j * shiftZ)));
+
+            //XZ Back
+            box->pushVertex(new Vertex(x - (i * shiftX),-y,z - (j * shiftZ)));
+            box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),-y,z - (j * shiftZ)));
+            box->pushVertex(new Vertex(x - (i * shiftX),-y,(z-shiftZ) - (j * shiftZ)));
+
+            box->pushVertex(new Vertex(x - (i * shiftX),-y,(z-shiftZ) - (j * shiftZ)));
+            box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),-y,z - (j * shiftZ)));
+            box->pushVertex(new Vertex((x-shiftX) - (i * shiftX),-y,(z-shiftZ) - (j * shiftZ)));
+
+
+
+        }
+    }
+    return box;
+
+}
