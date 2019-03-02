@@ -31,7 +31,7 @@ float rb = 0.5f, gb = 0.823f, bb = 0.5f;
 
 void help_menu(){
     cout<<"################################" << endl;
-    cout<<"#          HELP MENU           #" << endl;
+    cout<<"#         Engine MENU          #" << endl;
     cout<<"#    Usage:                    #" << endl;
     cout<<"#    ./engine path_to_XML      #" << endl;
     cout<<"#                              #" << endl;
