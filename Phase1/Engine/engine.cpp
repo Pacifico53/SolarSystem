@@ -48,6 +48,8 @@ void help_menu(){
     cout<<"#                              #" << endl;
     cout<<"#       m - Make axis longer   #" << endl;
     cout<<"#       n - Make axis smaller  #" << endl;
+    cout<<"#                              #" << endl;
+    cout<<"#       c - Reset colors       #" << endl;
     cout<<"################################" << endl;
 }
 
@@ -176,6 +178,8 @@ void keyBinds(unsigned char key, int x, int y){
         case 'm': ax += 2.0f; ay += 2.0f; az += 2.0f;
             break;
         case 'n': ax -= 2.0f; ay -= 2.00f; az -= 2.0f;
+            break;
+        case 'c': colors.clear();
             break;
     }
     glutPostRedisplay();

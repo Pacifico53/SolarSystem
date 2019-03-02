@@ -15,7 +15,7 @@ void generatePlane(char* s, char* f_path);
 void generateCone(char* r, char* h, char* sl, char* st,char * f_path);
 void generateSphere(char* r, char* sl, char* st, char* f_path);
 void generateBox(char* x, char* y, char* z, char* n, char* f_path);
-void generateCylinder(char* r, char* h, char* sl, char* st,char * f_path);
+void generateCylinder(char* r, char* h, char* sl,char * f_path);
 
 
 int main(int argc, char** argv){
@@ -41,9 +41,9 @@ int main(int argc, char** argv){
             generateBox(argv[2], argv[3], argv[4], argv[5], argv[6]);
             std::cout << "Done!" << std::endl;
         }
-        else if (!(strcmp(argv[1],"cylinder")) && (argc == 7)) {
+        else if (!(strcmp(argv[1],"cylinder")) && (argc == 6)) {
             std::cout << "Generating cylinder..." << std::endl;
-            generateCylinder(argv[2], argv[3], argv[4], argv[5], argv[6]);
+            generateCylinder(argv[2], argv[3], argv[4], argv[5]);
             std::cout << "Done!" << std::endl;
         }
     }
