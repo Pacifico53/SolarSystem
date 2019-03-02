@@ -28,6 +28,9 @@ Shape* createPlane(float size){
 
 }
 
+
+
+
 Shape* createCone(float radius, float height, int slices, int stacks){
     float h_angle = 2 * M_PI / slices, v_angle = height / stacks, a=0,b=0, n_radius = 0, r_angle = radius / stacks;
     Shape* cone = new Shape();
@@ -67,4 +70,30 @@ Shape* createCone(float radius, float height, int slices, int stacks){
 
     return cone;
 
+}
+
+Shape* createSphere(float radius, int slices, int stacks){
+    float h_angle = 2 * M_PI / slices , v_angle = M_PI / stacks, a = 0, b = 0;
+    Shape* sphere = new Shape();
+
+    for(int i = 0; i < stacks; i++){
+        b = i * v_angle;
+        for(int j = 0; j < slices; j++){
+            a = j * h_angle;
+
+            sphere->pushVertex(new Vertex(radius*sin(a)*sin(b),radius*cos(b),radius*cos(a)*sin(b)));
+            sphere->pushVertex(new Vertex(radius*sin(a)*sin(b+v_angle),radius*cos(b+v_angle),radius*cos(a)*sin(b+v_angle)));
+            sphere->pushVertex(new Vertex(radius*sin(a+h_angle)*sin(b),radius*cos(b),radius*cos(a+h_angle)*sin(b)));
+
+            sphere->pushVertex(new Vertex(radius*sin(a+h_angle)*sin(b),radius*cos(b),radius*cos(a+h_angle)*sin(b)));
+            sphere->pushVertex(new Vertex(radius*sin(a)*sin(b+v_angle),radius*cos(b+v_angle),radius*cos(a)*sin(b+v_angle)));
+            sphere->pushVertex(new Vertex(radius*sin(a+h_angle)*sin(b+v_angle),radius*cos(b+v_angle),radius*cos(a+h_angle)*sin(b+v_angle)));
+
+        }
+
+    }
+
+
+
+    return sphere;
 }
