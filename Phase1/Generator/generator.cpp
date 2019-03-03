@@ -51,18 +51,18 @@ int main(int argc, char** argv){
 }
 
 void gen_menu(){
-    cout<<"#####################################################" << endl;
-    cout<<"#                  Generator MENU                   #" << endl;
-    cout<<"#     Usage:                                        #" << endl;
-    cout<<"#     ./generate <shape> [options] <file>           #" << endl;
-    cout<<"#                                                   #" << endl;
-    cout<<"#     Shapes & Options:                             #" << endl;
-    cout<<"#\t-> plane <size>                                  #" << endl;
-    cout<<"#\t-> box <width> <height> <length> <divisions>     #" << endl;
-    cout<<"#\t-> sphere <radius> <slices> <stacks>             #" << endl;
-    cout<<"#\t-> cone <radius> <height> <slices> <stacks>      #" << endl;
-    cout<<"#\t-> cylinder <radius> <height> <slices>           #" << endl;
-    cout<<"#####################################################" << endl;
+    cout<<"#######################################################" << endl;
+    cout<<"#                  Generator MENU                     #" << endl;
+    cout<<"#     Usage:                                          #" << endl;
+    cout<<"#     ./generate <shape> [options] <file>             #" << endl;
+    cout<<"#                                                     #" << endl;
+    cout<<"#     Shapes & Options:                               #" << endl;
+    cout<<"#        -> plane <size>                              #" << endl;
+    cout<<"#        -> box <width> <height> <length> <divisions> #" << endl;
+    cout<<"#        -> sphere <radius> <slices> <stacks>         #" << endl;
+    cout<<"#        -> cone <radius> <height> <slices> <stacks>  #" << endl;
+    cout<<"#        -> cylinder <radius> <height> <slices>       #" << endl;
+    cout<<"#######################################################" << endl;
 }
 
 void generatePlane(char* s, char* f_path){

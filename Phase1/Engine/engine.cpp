@@ -38,6 +38,7 @@ void help_menu(){
     cout<<"#       w - Rotate up          #" << endl;
     cout<<"#       s - Rotate down        #" << endl;
     cout<<"#       a - Rotate left        #" << endl;
+    cout<<"#       d - Rotate right       #" << endl;
     cout<<"#                              #" << endl;
     cout<<"#       j - Fill Mode          #" << endl;
     cout<<"#       k - Line Mode          #" << endl;
