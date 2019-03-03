@@ -168,10 +168,7 @@ Shape* createCylinder(float radius, float height, int slices){
         cone->pushVertex(new Vertex(radius*cos(a + h_angle), height/2,radius*sin(a + h_angle)));
         cone->pushVertex(new Vertex(radius*cos(a + h_angle), -height/2,radius*sin(a + h_angle)));
         cone->pushVertex(new Vertex(radius*cos(a),height/2,radius*sin(a)));
-    }
 
-    for (i = 0; i < slices;i++){
-        a = i * h_angle;
         cone->pushVertex(new Vertex(radius*cos(a + h_angle),-height/2,radius*sin(a + h_angle)));
         cone->pushVertex(new Vertex(0,-height/2,0));
         cone->pushVertex(new Vertex(radius*cos(a),-height/2,radius*sin(a)));
