@@ -16,6 +16,7 @@ void generateCone(char* r, char* h, char* sl, char* st,char * f_path);
 void generateSphere(char* r, char* sl, char* st, char* f_path);
 void generateBox(char* x, char* y, char* z, char* n, char* f_path);
 void generateCylinder(char* r, char* h, char* sl,char * f_path);
+void generateTorus(char* r, char* d, char* s, char* rings, char* f_path);
 
 
 int main(int argc, char** argv){
@@ -44,6 +45,10 @@ int main(int argc, char** argv){
         else if (!(strcmp(argv[1],"cylinder")) && (argc == 6)) {
             std::cout << "Generating cylinder..." << std::endl;
             generateCylinder(argv[2], argv[3], argv[4], argv[5]);
+            std::cout << "Done!" << std::endl;
+        }
+        else if (!strcmp(argv[1],"torus") && argc == 7){
+            generateTorus(argv[2], argv[3], argv[4], argv[5], argv[6]);
             std::cout << "Done!" << std::endl;
         }
     }
@@ -103,6 +108,14 @@ void generateCylinder(char* r, char* h, char* sl, char * f_path){
     ofstream file;
     Shape* c = createCylinder(radius,height,slices);
     writeFile(c,f_path);
+}
+
+void generateTorus(char* r, char* d, char* s, char* ri, char* f_path) {
+    float radius = atof(r), diameter = atof(d);
+    int slices = atoi(s), rings = atoi(ri);
+    Shape *t = createTorus(radius, diameter, slices, rings);
+    ofstream file;
+    writeFile(t, f_path);
 }
 
 void writeFile(Shape* s, string f_path){
