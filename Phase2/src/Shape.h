@@ -11,16 +11,16 @@ class Shape{
 
     vector<Vertex*> vertexes;
 
-public:
-    explicit Shape();
-    explicit Shape(vector<Vertex*>);
-    void pushVertex(Vertex* v);
-    void pushShape(Shape* s);
-    void getVertex(int i, Vertex** v);
-    void reverse();
-    int getSize();
-    vector<Vertex*> getVertexes();
-    virtual ~Shape(void);
+    public:
+        explicit Shape();
+        explicit Shape(vector<Vertex*>);
+        void pushVertex(Vertex* v);
+        void pushShape(Shape* s);
+        void getVertex(int i, Vertex** v);
+        void reverse();
+        int getSize();
+        vector<Vertex*> getVertexes();
+        virtual ~Shape();
 };
 
 #endif

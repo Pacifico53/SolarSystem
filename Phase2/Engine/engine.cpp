@@ -12,6 +12,8 @@
 #include <string>
 #include "../src/Vertex.h"
 #include "../src/Shape.h"
+#include "Parser.h"
+#include "../src/Group.h"
 
 using namespace std;
 using namespace tinyxml2;
@@ -19,14 +21,12 @@ using namespace tinyxml2;
 //This is to be able to change the mode with keybinds
 int mode = GL_LINE;
 
-vector<Shape*> shapes;
+Group* scene;
 
 //Camera movement variables
 float angleX = 1.0f, angleY = 1.0f;
 float ex = 0.0f, ey = 0.0f , ez = 0.0f;
 float ax = 0.0f, ay = 0.0f , az = 0.0f;
-
-vector<float> colors;
 
 void help_menu(){
     cout<<"################################" << endl;
@@ -50,7 +50,6 @@ void help_menu(){
     cout<<"#       m - Make axis longer   #" << endl;
     cout<<"#       n - Make axis smaller  #" << endl;
     cout<<"#                              #" << endl;
-    cout<<"#       c - Reset colors       #" << endl;
     cout<<"################################" << endl;
 }
 
@@ -79,15 +78,46 @@ void changeSize(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
 }
 
+void render(Group* g){
+    float x, y, z;
+    glPushMatrix();
 
-void renderScene(void) {
+    vector<Action*> actions = g->getActions();
+    for(auto &action : actions){
+        action->apply();
+    }
+
+    vector<Shape*> shapes = g->getShapes();
+
+    for(auto &shape : shapes){
+        vector<Vertex*> verts = shape->getVertexes();
+
+        glBegin(GL_TRIANGLES);
+        for(auto &vert : verts){
+            x = vert->getX();
+            y = vert->getY();
+            z = vert->getZ();
+            glVertex3f(x,y,z);
+        }
+        glEnd();
+    }
+
+    vector<Group*> children = g->getChildren();
+    for (auto &child : children) {
+        render(child);
+    }
+
+    glPopMatrix();
+}
+
+void renderScene() {
 
     // clear buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // set the camera
     glLoadIdentity();
-    gluLookAt(5.0 + ex , 5.0 + ey , 5.0 + ez ,
+    gluLookAt(50.0 + ex , 50.0 + ey , 50.0 + ez ,
               0.0,0.0,0.0,
               0.0f,1.0f,0.0f);
 
@@ -114,40 +144,7 @@ void renderScene(void) {
     glEnd();
 
     // Draw shapes
-    float x =0, y = 0, z = 0;
-    float r= 0, g=0, b=0;
-    unsigned long i = 0;
-
-    for (auto &shape : shapes) {
-        vector<Vertex*> v = shape->getVertexes();
-
-        //Checks if there is already saved rgb values for given shape
-        //if not, generates random ones and saves them
-        if (colors.size() > i){
-            r = colors.at(i);
-            g = colors.at(i+1);
-            b = colors.at(i+2);
-        }
-        else{
-            r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-            g = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-            b = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-            colors.push_back(r);
-            colors.push_back(g);
-            colors.push_back(b);
-        }
-        i+=3;
-
-        glColor3f(r,g,b);
-        glBegin(GL_TRIANGLES);
-        for (auto &vert : v) {
-            x = vert->getX();
-            y = vert->getY();
-            z = vert->getZ();
-            glVertex3d(x,y,z);
-        }
-        glEnd();
-    }
+    render(scene);
 
     // End of frame
     glutSwapBuffers();
@@ -172,6 +169,8 @@ void keyBinds(unsigned char key, int x, int y){
             break;
         case 'l': mode = GL_POINT;
             break;
+        case 'f': glutFullScreen();
+            break;
         case '+': ex -= 2.0f; ey -= 2.0f; ez -= 2.0f;
             break;
         case '-': ex += 2.0f; ey += 2.0f; ez += 2.0f;
@@ -180,87 +179,25 @@ void keyBinds(unsigned char key, int x, int y){
             break;
         case 'n': ax -= 2.0f; ay -= 2.00f; az -= 2.0f;
             break;
-        case 'c': colors.clear();
-            break;
     }
     glutPostRedisplay();
 }
 
-//Parses through the xml file and returns a vector of all the 3d files/shapes
-vector<string> parseXML(char* fileName){
-    string modelName;
-    vector<string> files;
-
-    XMLDocument docXML;
-    XMLElement *root, *element;
-
-    if((docXML.LoadFile(fileName)) == 0){
-        root = docXML.FirstChildElement("scene");
-        for(element = root->FirstChildElement("model"); element; element = element->NextSiblingElement()){
-            if(!strcmp(element->Name(),"model")){
-                modelName = element->Attribute("file");
-                files.push_back(modelName);
-                cout << "Model found: " << modelName << "." << endl;
-            }
-        }
-    }
-    else{
-        cout << "XML file \"" << fileName << "\" not found!" << endl;
-    }
-
-    return files;
-}
-
-//Reads the .3d file and returns a vector of all the vertexes found
-vector<Vertex*> read_file(string fileName){
-    vector<Vertex*> result;
-    string line;
-    string pathToFile = "../files3d/" + fileName;
-
-    ifstream file(pathToFile);
-
-    if (!file.fail()){
-        while(getline(file, line)){
-            Vertex *v = new Vertex(line);
-            result.push_back(v);
-        }
-    }
-    else {
-        cout << "Failed to open file " << fileName << "." << endl;
-    }
-
-    return result;
-}
-
 int main(int argc, char **argv) {
-    //Seeds the rng
-    srand (static_cast <unsigned> (time(nullptr)));
-
-    vector<string> files3d;
     string line;
 
     if(argc != 2){
         help_menu();
     }
-    else {
-        files3d = parseXML(argv[1]);
-        if(!files3d.empty()){
-            for (auto &file : files3d) {
-                vector<Vertex*> vec = read_file(file);
-                shapes.push_back(new Shape(vec));
-            }
-        }
-        else{
-            return 0;
-        }
-    }
+    else
+        scene = parseXML(argv[1]);
 
     // init GLUT and the window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
     glutInitWindowPosition(10,100);
     glutInitWindowSize(900,800);
-    glutCreateWindow("Phase1");
+    glutCreateWindow("Phase2");
 
     // Required callback registry
     glutDisplayFunc(renderScene);
