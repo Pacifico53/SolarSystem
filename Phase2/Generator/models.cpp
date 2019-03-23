@@ -181,7 +181,7 @@ Shape* createCylinder(float radius, float height, int slices){
     return cone;
 }
 
-Shape* createTorus(float radius, float diameter, int slices, int rings){
+Shape* createTorus(float innerRadius, float outerRadius, int slices, int rings){
     float sideSize = (2*M_PI) / slices;
     float ringSize = (2*M_PI) / rings;
 
@@ -200,13 +200,13 @@ Shape* createTorus(float radius, float diameter, int slices, int rings){
         for(j=0; j<slices+1; j++){
             //current points
             float s0 = cos(j*sideSize);
-            float r0 = radius*s0 + diameter;
-            float z0 = radius * sin(j*sideSize);
+            float r0 = innerRadius*s0 + outerRadius;
+            float z0 = innerRadius * sin(j*sideSize);
 
             //next points
             float s1 = cos((j+1) * sideSize);
-            float r1 = radius * s1 + diameter;
-            float z1 = radius * sin((j+1)*sideSize);
+            float r1 = innerRadius * s1 + outerRadius;
+            float z1 = innerRadius * sin((j+1)*sideSize);
 
             torus->pushVertex(new Vertex(x0*r0, y0*r0, z0));
             torus->pushVertex(new Vertex(x1*r0, y1*r0, z0));

@@ -16,7 +16,7 @@ void generateCone(char* r, char* h, char* sl, char* st,char * f_path);
 void generateSphere(char* r, char* sl, char* st, char* f_path);
 void generateBox(char* x, char* y, char* z, char* n, char* f_path);
 void generateCylinder(char* r, char* h, char* sl,char * f_path);
-void generateTorus(char* r, char* d, char* s, char* rings, char* f_path);
+void generateTorus(char* r, char* R, char* s, char* rings, char* f_path);
 
 
 int main(int argc, char** argv){
@@ -56,18 +56,19 @@ int main(int argc, char** argv){
 }
 
 void gen_menu(){
-    cout<<"#######################################################" << endl;
-    cout<<"#                  Generator MENU                     #" << endl;
-    cout<<"#     Usage:                                          #" << endl;
-    cout<<"#     ./generate <shape> [options] <file>             #" << endl;
-    cout<<"#                                                     #" << endl;
-    cout<<"#     Shapes & Options:                               #" << endl;
-    cout<<"#        -> plane <size>                              #" << endl;
-    cout<<"#        -> box <width> <height> <length> <divisions> #" << endl;
-    cout<<"#        -> sphere <radius> <slices> <stacks>         #" << endl;
-    cout<<"#        -> cone <radius> <height> <slices> <stacks>  #" << endl;
-    cout<<"#        -> cylinder <radius> <height> <slices>       #" << endl;
-    cout<<"#######################################################" << endl;
+    cout<<"################################################################" << endl;
+    cout<<"#                       Generator MENU                         #" << endl;
+    cout<<"#     Usage:                                                   #" << endl;
+    cout<<"#     ./generate <shape> [options] <file>                      #" << endl;
+    cout<<"#                                                              #" << endl;
+    cout<<"#     Shapes & Options:                                        #" << endl;
+    cout<<"#        -> plane <size>                                       #" << endl;
+    cout<<"#        -> box <width> <height> <length> <divisions>          #" << endl;
+    cout<<"#        -> sphere <radius> <slices> <stacks>                  #" << endl;
+    cout<<"#        -> cone <radius> <height> <slices> <stacks>           #" << endl;
+    cout<<"#        -> cylinder <radius> <height> <slices>                #" << endl;
+    cout<<"#        -> torus <innerRadius> <outerRadius> <slices> <rings> #" << endl;
+    cout<<"################################################################" << endl;
 }
 
 void generatePlane(char* s, char* f_path){
@@ -110,8 +111,8 @@ void generateCylinder(char* r, char* h, char* sl, char * f_path){
     writeFile(c,f_path);
 }
 
-void generateTorus(char* r, char* d, char* s, char* ri, char* f_path) {
-    float radius = atof(r), diameter = atof(d);
+void generateTorus(char* r, char* R, char* s, char* ri, char* f_path) {
+    float radius = atof(r), diameter = atof(R);
     int slices = atoi(s), rings = atoi(ri);
     Shape *t = createTorus(radius, diameter, slices, rings);
     ofstream file;
