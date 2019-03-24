@@ -16,7 +16,7 @@ void generateCone(char* r, char* h, char* sl, char* st,char * f_path);
 void generateSphere(char* r, char* sl, char* st, char* f_path);
 void generateBox(char* x, char* y, char* z, char* n, char* f_path);
 void generateCylinder(char* r, char* h, char* sl,char * f_path);
-void generateTorus(char* r, char* R, char* s, char* rings, char* f_path);
+void generateTorus(char* innerR, char* outerR, char* sl, char* nrings, char* f_path);
 
 
 int main(int argc, char** argv){
@@ -111,10 +111,10 @@ void generateCylinder(char* r, char* h, char* sl, char * f_path){
     writeFile(c,f_path);
 }
 
-void generateTorus(char* r, char* R, char* s, char* ri, char* f_path) {
-    float radius = atof(r), diameter = atof(R);
-    int slices = atoi(s), rings = atoi(ri);
-    Shape *t = createTorus(radius, diameter, slices, rings);
+void generateTorus(char* innerR, char* outerR, char* sl, char* nrings, char* f_path) {
+    float radius = atof(innerR), radiusOuter = atof(outerR);
+    int slices = atoi(sl), rings = atoi(nrings);
+    Shape *t = createTorus(radius, radiusOuter, slices, rings);
     ofstream file;
     writeFile(t, f_path);
 }
