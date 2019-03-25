@@ -62,11 +62,12 @@ void gen_menu(){
     cout<<"#     ./generate <shape> [options] <file>             #" << endl;
     cout<<"#                                                     #" << endl;
     cout<<"#     Shapes & Options:                               #" << endl;
-    cout<<"#        -> plane <size>                              #" << endl;
-    cout<<"#        -> box <width> <height> <length> <divisions> #" << endl;
-    cout<<"#        -> sphere <radius> <slices> <stacks>         #" << endl;
-    cout<<"#        -> cone <radius> <height> <slices> <stacks>  #" << endl;
-    cout<<"#        -> cylinder <radius> <height> <slices>       #" << endl;
+    cout<<"#   -> plane <size>                                   #" << endl;
+    cout<<"#   -> box <width> <height> <length> <divisions>      #" << endl;
+    cout<<"#   -> sphere <radius> <slices> <stacks>              #" << endl;
+    cout<<"#   -> cone <radius> <height> <slices> <stacks>       #" << endl;
+    cout<<"#   -> cylinder <radius> <height> <slices>            #" << endl;
+    cout<<"#   -> torus <inRadius> <outRadius> <slices> <rings>  #" << endl;
     cout<<"#######################################################" << endl;
 }
 
