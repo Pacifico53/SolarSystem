@@ -1,4 +1,153 @@
 <scene>
-	<model file="sphere.3d" />
+    <group>
+        <!--        SUN         -->
+        <scale X="5" Y="5" Z="5"/>
+        <colour R="255" G="219" B="36" />
+        <models>
+            <model file="sphere.3d" />
+        </models>
+        <group>
+            <!--    MERCURY    -->
+            <colour R="176" G="174" B="166" />
+            <translate X="6.25" Y="0" Z="0" />
+            <scale X="0.038" Y="0.038" Z="0.038" />
+            <models>
+            <model file="sphere.3d" />
+            </models>
+        </group>
+            <!--    VENUS      -->
+        <group>
+            <colour R="217" G="211" B="211" />
+            <translate X="7.38" Y="0" Z="0" />
+            <scale X="0.064" Y="0.064" Z="0.064" />
+            <models>
+            <model file="sphere.3d" />
+            </models>
+        </group>
+            <!--    EARTH      -->
+        <group>
+            <colour R="10" G="10" B="255" />
+            <translate X="8.31" Y="0" Z="0" />
+            <scale X="0.066" Y="0.066" Z="0.066" />
+            <models>
+                <model file="sphere.3d" />
+            </models>
+                <!--    MOON      -->
+            <group>
+                <colour R="255" G="255" B="255" />
+                <translate X="0" Y="0" Z="4" />
+                <scale X="0.27" Y="0.27" Z="0.27" />
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+            <!--    MARS     -->
+        <group>
+            <colour R="132" G="23" B="21" />
+            <translate X="10.03" Y="0" Z="0" />
+            <scale X="0.044" Y="0.044" Z="0.044" />
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+            <!--   JUPITER   -->
+        <group>
+            <colour R="202" G="98" B="65" />
+            <translate X="22.2" Y="0" Z="0" />
+            <scale X="0.70" Y="0.70" Z="0.70" />
+            <models>
+                <model file="sphere.3d" />
+            </models>
+                <!--    IO      -->
+            <group>
+                <colour R="255" G="255" B="255" />
+                <translate X="2.11" Y="0" Z="2.11" />
+                <scale X="0.026" Y="0.026" Z="0.026" />
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+                <!--    EUROPA      -->
+            <group>
+                <colour R="255" G="255" B="255" />
+                <translate X="6.72" Y="0" Z="0" />
+                <scale X="0.022" Y="0.022" Z="0.022" />
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+                <!--    GANIMEDES      -->
+            <group>
+                <colour R="255" G="255" B="255" />
+                <translate X="5.35" Y="0" Z="-5.35" />
+                <scale X="0.037" Y="0.037" Z="0.037" />
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+            	<!--    CALISTO      -->
+            <group>
+                <colour R="255" G="255" B="255" />
+                <translate X="-7" Y="0" Z="7" />
+                <scale X="0.034" Y="0.034" Z="0.034" />
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+        <!--   SATURN   -->
+        <group>
+            <colour R="213" G="180" B="119" />
+            <translate X="36.72" Y="0" Z="0" />
+            <scale X="0.62" Y="0.62" Z="0.62" />
+            <models>
+                <model file="sphere.3d" />
+            </models>
+           <!--  SATURN RING  -->
+            <group>
+                <rotate angle="100" X="1" Y="0" z="0" />
+                <scale X="0.7" Y="0.7" Z="0" />
+                <models>
+                    <model file="torus.3d" />
+                </models>
+            </group>
+            	<!--    TITA      -->
+            <group>
+                <colour R="230" G="92" B="0" />
+                <translate X="13" Y="0" Z="0" />
+                <scale X="0.044" Y="0.044" Z="0.044" />
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+        <!--   URANUS   -->
+        <group>
+            <colour R="205" G="243" B="244" />
+            <translate X="68.38" Y="0" Z="0" />
+            <scale X="0.38" Y="0.38" Z="0.38" />
+            <models>
+                <model file="sphere.3d" />
+            </models>
+        </group>
+        <!--   NEPTUNE   -->
+        <group>
+            <colour R="70" G="117" B="244" />
+            <translate X="105" Y="0" Z="0" />
+            <scale X="0.37" Y="0.37" Z="0.37" />
+            <models>
+                <model file="sphere.3d" />
+            </models>
+            <!--    TRITAO      -->
+            <group>
+                <colour R="255" G="255" B="255" />
+                <translate X="13" Y="0" Z="0" />
+                <scale X="0.055" Y="0.055" Z="0.055" />
+                <models>
+                    <model file="sphere.3d" />
+                </models>
+            </group>
+        </group>
+    </group>
 </scene>
-

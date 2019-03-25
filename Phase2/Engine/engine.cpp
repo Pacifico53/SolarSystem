@@ -24,8 +24,8 @@ int mode = GL_LINE;
 Group* scene;
 
 //Camera movement variables
-float angleX = 1.0f, angleY = 1.0f;
-float ex = 0.0f, ey = 0.0f , ez = 0.0f;
+float camX= 10, camY = 10 , camZ = 10;
+float angleX = 0.8f, angleY = 0.4f, radius = 90.0f;
 float ax = 0.0f, ay = 0.0f , az = 0.0f;
 
 void help_menu(){
@@ -78,6 +78,12 @@ void changeSize(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
 }
 
+void spherical2Cartesian(){
+    camX = radius * cos(angleY) * sin(angleX);
+    camY = radius * sin(angleY);
+    camZ = radius * cos(angleY) * cos(angleX);
+}
+
 void render(Group* g){
     float x, y, z;
     glPushMatrix();
@@ -117,7 +123,7 @@ void renderScene() {
 
     // set the camera
     glLoadIdentity();
-    gluLookAt(50.0 + ex , 50.0 + ey , 50.0 + ez ,
+    gluLookAt(camX , camY , camZ ,
               0.0,0.0,0.0,
               0.0f,1.0f,0.0f);
 
@@ -132,15 +138,15 @@ void renderScene() {
     glBegin(GL_LINES);
         glColor3f(1.0, 0.0, 0.0);
         glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(5.0 + ax, 0.0, 0.0);
+        glVertex3f(10.0 + ax, 0.0, 0.0);
 
         glColor3f(0.0, 1.0, 0.0);
         glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.0, 5.0 + ay, 0.0);
+        glVertex3f(0.0, 10.0 + ay, 0.0);
 
         glColor3f(0.0, 0.0, 1.0);
         glVertex3f(0.0, 0.0, 0.0);
-        glVertex3f(0.0, 0.0, 5.0 + az);
+        glVertex3f(0.0, 0.0, 10.0 + az);
     glEnd();
 
     // Draw shapes
@@ -150,18 +156,22 @@ void renderScene() {
     glutSwapBuffers();
 }
 
-
-
 // write function to process keyboard events
 void keyBinds(unsigned char key, int x, int y){
     switch(key){
-        case 'w': angleY+=5.0f;
+        case 'w':
+            angleY+=0.1f;
+            if(angleY > 1.5f)
+                angleY = 1.5f;
             break;
-        case 's': angleY-=5.0f;
+        case 's':
+            angleY-=0.1f;
+            if(angleY < -1.5f)
+                angleY = -1.5f;
             break;
-        case 'a': angleX-=5.0f;
+        case 'a': angleX-=0.1f;
             break;
-        case 'd': angleX+=5.0f;
+        case 'd': angleX+=0.1f;
             break;
         case 'j': mode = GL_FILL;
             break;
@@ -171,15 +181,20 @@ void keyBinds(unsigned char key, int x, int y){
             break;
         case 'f': glutFullScreen();
             break;
-        case '+': ex -= 2.0f; ey -= 2.0f; ez -= 2.0f;
+        case '-':
+            radius += 10.1f;
             break;
-        case '-': ex += 2.0f; ey += 2.0f; ez += 2.0f;
+        case '+':
+            radius -= 10.1f;
+            if(radius < 0.1f)
+                radius = 0.1f;
             break;
         case 'm': ax += 2.0f; ay += 2.0f; az += 2.0f;
             break;
         case 'n': ax -= 2.0f; ay -= 2.00f; az -= 2.0f;
             break;
     }
+    spherical2Cartesian();
     glutPostRedisplay();
 }
 
@@ -192,6 +207,7 @@ int main(int argc, char **argv) {
     else
         scene = parseXML(argv[1]);
 
+    spherical2Cartesian();
     // init GLUT and the window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
