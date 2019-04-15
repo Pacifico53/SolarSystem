@@ -1,6 +1,7 @@
 #include "../src/Vertex.h"
 #include "../src/Shape.h"
 #include "models.h"
+#include "bezier.h"
 
 #include <cstring>
 #include <fstream>
@@ -17,6 +18,7 @@ void generateSphere(char* r, char* sl, char* st, char* f_path);
 void generateBox(char* x, char* y, char* z, char* n, char* f_path);
 void generateCylinder(char* r, char* h, char* sl,char * f_path);
 void generateTorus(char* innerR, char* outerR, char* sl, char* nrings, char* f_path);
+void generatePatch(char* patch_path, int tesselation, char* f_path);
 
 
 int main(int argc, char** argv){
@@ -51,24 +53,28 @@ int main(int argc, char** argv){
             generateTorus(argv[2], argv[3], argv[4], argv[5], argv[6]);
             std::cout << "Done!" << std::endl;
         }
+        else if(!strcmp(argv[1],"patch") && argc == 5){
+            generatePatch(argv[2],atoi(argv[3]), argv[4]);
+        }
     }
     return 0;
 }
 
 void gen_menu(){
-    cout<<"################################################################" << endl;
-    cout<<"#                       Generator MENU                         #" << endl;
-    cout<<"#     Usage:                                                   #" << endl;
-    cout<<"#     ./generate <shape> [options] <file>                      #" << endl;
-    cout<<"#                                                              #" << endl;
-    cout<<"#     Shapes & Options:                                        #" << endl;
-    cout<<"#        -> plane <size>                                       #" << endl;
-    cout<<"#        -> box <width> <height> <length> <divisions>          #" << endl;
-    cout<<"#        -> sphere <radius> <slices> <stacks>                  #" << endl;
-    cout<<"#        -> cone <radius> <height> <slices> <stacks>           #" << endl;
-    cout<<"#        -> cylinder <radius> <height> <slices>                #" << endl;
-    cout<<"#        -> torus <innerRadius> <outerRadius> <slices> <rings> #" << endl;
-    cout<<"################################################################" << endl;
+    cout<<"#################################################################" << endl;
+    cout<<"#                       Generator MENU                          #" << endl;
+    cout<<"#     Usage:                                                    #" << endl;
+    cout<<"#     ./generate <shape> [options] <file>                       #" << endl;
+    cout<<"#                                                               #" << endl;
+    cout<<"#     Shapes & Options:                                         #" << endl;
+    cout<<"#        -> plane <size>                                        #" << endl;
+    cout<<"#        -> box <width> <height> <length> <divisions>           #" << endl;
+    cout<<"#        -> sphere <radius> <slices> <stacks>                   #" << endl;
+    cout<<"#        -> cone <radius> <height> <slices> <stacks>            #" << endl;
+    cout<<"#        -> cylinder <radius> <height> <slices>                 #" << endl;
+    cout<<"#        -> torus <innerRadius> <outerRadius> <slices> <rings>  #" << endl;
+    cout<<"#        -> patch <path_to_path_file> <tesselation> <shapename> #" << endl;
+    cout<<"#################################################################" << endl;
 }
 
 void generatePlane(char* s, char* f_path){
@@ -117,6 +123,11 @@ void generateTorus(char* innerR, char* outerR, char* sl, char* nrings, char* f_p
     Shape *t = createTorus(radius, radiusOuter, slices, rings);
     ofstream file;
     writeFile(t, f_path);
+}
+
+void generatePatch(char* patch_path, int tesselation, char* f_path){
+    Shape* patch = parseBezier(patch_path,tesselation);
+    writeFile(patch,f_path);
 }
 
 void writeFile(Shape* s, string f_path){
