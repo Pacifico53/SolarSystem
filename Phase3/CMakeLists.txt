@@ -4,7 +4,7 @@ set(CMAKE_CXX_FLAGS "-Wall -o3 -g")
 
 project(Engine)
 set(ENGINE_FILES Engine/engine.cpp Engine/tinyxml2.cpp
-        src/Vertex.cpp src/Vertex.h src/Shape.cpp src/Shape.h src/Action.cpp src/Action.h Engine/Parser.cpp Engine/Parser.h src/Group.cpp src/Group.h)
+        src/Vertex.cpp src/Vertex.h src/Shape.cpp src/Shape.h src/Action.cpp src/Action.h Engine/Parser.cpp Engine/Parser.h src/Group.cpp src/Group.h src/CatmullRom.cpp src/CatmullRom.h)
 find_package(GLUT REQUIRED)
 find_package(OpenGL REQUIRED)
 

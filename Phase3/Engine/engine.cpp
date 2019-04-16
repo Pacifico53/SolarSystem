@@ -195,7 +195,6 @@ void keyBinds(unsigned char key, int x, int y){
             break;
     }
     spherical2Cartesian();
-    glutPostRedisplay();
 }
 
 int main(int argc, char **argv) {
@@ -218,6 +217,8 @@ int main(int argc, char **argv) {
     // Required callback registry
     glutDisplayFunc(renderScene);
     glutReshapeFunc(changeSize);
+    glutIdleFunc(renderScene);
+
 
     // put here the registration of the keyboard callbacks
     glutKeyboardFunc( keyBinds );
