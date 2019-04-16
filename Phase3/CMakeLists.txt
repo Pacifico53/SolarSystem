@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.13)
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_FLAGS "-Wall -o3 -g")
+set(CMAKE_CXX_FLAGS "-Wall -o3 -g -lGLEW")
 
 project(Engine)
 set(ENGINE_FILES Engine/engine.cpp Engine/tinyxml2.cpp
@@ -12,6 +12,7 @@ project(Generator)
 set(GENERATOR_FILES Generator/generator.cpp Generator/models.cpp Generator/models.h src/Vertex.cpp src/Vertex.h src/Shape.cpp src/Shape.h Generator/bezier.cpp Generator/bezier.h)
 
 add_executable(generator ${GENERATOR_FILES})
+target_link_libraries(generator ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
 
 add_executable(engine ${ENGINE_FILES})
 target_link_libraries(engine ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})

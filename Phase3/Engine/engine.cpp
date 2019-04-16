@@ -1,3 +1,4 @@
+#include <GL/glew.h>
 #ifdef __APPLE__
 #include <GLUT/glut.h>
 #else
@@ -27,6 +28,8 @@ Group* scene;
 float camX= 10, camY = 10 , camZ = 10;
 float angleX = 0.8f, angleY = 0.4f, radius = 90.0f;
 float ax = 0.0f, ay = 0.0f , az = 0.0f;
+int frame = 0, timebase = 0;
+float fps;
 
 void help_menu(){
     cout<<"################################" << endl;
@@ -84,6 +87,24 @@ void spherical2Cartesian(){
     camZ = radius * cos(angleY) * cos(angleX);
 }
 
+void displayFPS(){
+    int time;
+    char display[30];
+
+    frame ++;
+    time = glutGet(GLUT_ELAPSED_TIME);
+    if(time - timebase > 1000){
+        fps = frame * 1000.0/(time-timebase);
+        timebase = time;
+        frame = 0;
+        sprintf(display,"Engine  |  %.2f FPS",fps);
+        glutSetWindowTitle(display);
+    }
+
+}
+
+
+
 void render(Group* g){
     float x, y, z;
     glPushMatrix();
@@ -96,16 +117,7 @@ void render(Group* g){
     vector<Shape*> shapes = g->getShapes();
 
     for(auto &shape : shapes){
-        vector<Vertex*> verts = shape->getVertexes();
-
-        glBegin(GL_TRIANGLES);
-        for(auto &vert : verts){
-            x = vert->getX();
-            y = vert->getY();
-            z = vert->getZ();
-            glVertex3f(x,y,z);
-        }
-        glEnd();
+        shape->draw();
     }
 
     vector<Group*> children = g->getChildren();
@@ -151,6 +163,7 @@ void renderScene() {
 
     // Draw shapes
     render(scene);
+    displayFPS();
 
     // End of frame
     glutSwapBuffers();
@@ -197,6 +210,19 @@ void keyBinds(unsigned char key, int x, int y){
     spherical2Cartesian();
 }
 
+void initScene(Group* scene){
+    vector<Shape*> shapes = scene->getShapes();
+
+    for (Shape* s : shapes){
+        s->setUp();
+    }
+
+    vector<Group*> childs = scene->getChildren();
+    for (Group* c : childs){
+        initScene(c);
+    }
+}
+
 int main(int argc, char **argv) {
     string line;
 
@@ -213,6 +239,7 @@ int main(int argc, char **argv) {
     glutInitWindowPosition(10,100);
     glutInitWindowSize(900,800);
     glutCreateWindow("Phase3");
+    glewInit();
 
     // Required callback registry
     glutDisplayFunc(renderScene);
@@ -226,6 +253,8 @@ int main(int argc, char **argv) {
     //  OpenGL settings
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    initScene(scene);
 
     // enter GLUT's main cycle
     glutMainLoop();

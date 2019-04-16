@@ -3,6 +3,8 @@
 
 #include <string>
 #include <vector>
+#include <GL/gl.h>
+
 #include "Vertex.h"
 
 using namespace std;
@@ -10,6 +12,7 @@ using namespace std;
 class Shape{
 
     vector<Vertex*> vertexes;
+    GLuint buffer;
 
     public:
         explicit Shape();
@@ -20,7 +23,11 @@ class Shape{
         void reverse();
         int getSize();
         vector<Vertex*> getVertexes();
+        GLuint getVertexBuffer();
+        void setUp();
+        void draw();
         virtual ~Shape();
+
 };
 
 #endif

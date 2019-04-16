@@ -1,8 +1,8 @@
 #include "../src/Vertex.h"
 #include "../src/Shape.h"
 #include "models.h"
-#include "bezier.h"
 
+#include "bezier.h"
 #include <cstring>
 #include <fstream>
 #include <iostream>

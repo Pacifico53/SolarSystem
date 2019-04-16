@@ -100,6 +100,7 @@ vector<Vertex*> read_file(string fileName){
             result.push_back(v);
         }
     }
+
     else {
         cout << "Failed to open file " << fileName << "." << endl;
     }

@@ -201,7 +201,7 @@
                 <colour R="36" G="0" B="84" />
                 <scale X="0.5" Y="0.5" Z="0.001"/>
                 <models>
-                    <model file="ring.3d" />
+                    <model file="torus.3d" />
                 </models>
             </group>
             <group>
@@ -209,7 +209,7 @@
                 <colour R="76" G="0" B="84"/>
                 <scale X="0.385" Y="0.385" Z="0.001"/>
                 <models>
-                    <model file="ring.3d" />
+                    <model file="torus.3d" />
                 </models>
             </group>
         </group>
