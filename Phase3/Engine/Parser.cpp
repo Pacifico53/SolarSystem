@@ -3,8 +3,6 @@
 #include <sstream>
 #include "Parser.h"
 
-int total = 0;
-
 Group* child_of(Group* parent){
     Group* child = new Group();
     parent->addChild(child);

@@ -53,7 +53,6 @@ void Color::parse(XMLElement *cl){
     cl->QueryFloatAttribute("B", &b);
 }
 
-
 void Translation::parse(XMLElement * tr){
     tr->QueryFloatAttribute("time", &time);
     tr->QueryFloatAttribute("X", &x);

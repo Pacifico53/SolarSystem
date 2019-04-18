@@ -101,17 +101,17 @@ Vertex* bezierCalc(float u, float v, int patch_num){
     return vertexCalc(v, result[0], result[1], result[2], result[3]);
 }
 
-Vertex* vertexCalc(float t, float p1[3], float p2[3], float p3[3], float p4[3]){
+Vertex* vertexCalc(float t, float p0[3], float p1[3], float p2[3], float p3[3]){
     float x, y, z;
 
-    float b0 = (1 - t) * (1 - t) * (1 - t);
-    float b1 = 3 * t * (1 - t) * (1 - t);
-    float b2 = 3 * t * t * (1 - t);
-    float b3 = t * t * t;
+    float k0 = (1 - t) * (1 - t) * (1 - t);
+    float k1 = 3 * t * (1 - t) * (1 - t);
+    float k2 = 3 * t * t * (1 - t);
+    float k3 = t * t * t;
 
-    x = b0*p1[0] + b1*p2[0] + b2*p3[0] + b3*p4[0];
-    y = b0*p1[1] + b1*p2[1] + b2*p3[1] + b3*p4[1];
-    z = b0*p1[2] + b1*p2[2] + b2*p3[2] + b3*p4[2];
+    x = k0*p0[0] + k1*p1[0] + k2*p2[0] + k3*p3[0];
+    y = k0*p0[1] + k1*p1[1] + k2*p2[1] + k3*p3[1];
+    z = k0*p0[2] + k1*p1[2] + k2*p2[2] + k3*p3[2];
 
     return (new Vertex(x, y, z));
 }
