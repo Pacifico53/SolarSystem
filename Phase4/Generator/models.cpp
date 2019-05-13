@@ -67,8 +67,9 @@ Shape* createSphere(float r, int slices, int stacks){
     Shape* sphere = new Shape();
     float x0,y0,z0,x1,y1,z1,x2,y2,z2,x3,y3,z3;
 
-    float texU = 1/slices;
-    float texV = 1/stacks;
+    float texU = 1/ (float)slices;
+    float texV = 1/ (float) stacks;
+
 
     for(int i = 0; i < stacks; i++){
         b = i * v_angle;
@@ -94,30 +95,41 @@ Shape* createSphere(float r, int slices, int stacks){
 
             sphere->pushVertex(new Vertex(x0,y0,z0));
             sphere->pushNormal(normalcalc(x0,y0,z0));
-            sphere->pushTexture(new Vertex(j*texU,i*texV + texV,0));
-
-
-            sphere->pushVertex(new Vertex(x1,y1,z1));
-            sphere->pushNormal(normalcalc(x1,y1,z1));
-            sphere->pushTexture(new Vertex(j*texU + texU,i*texV,0));
-
-            sphere->pushVertex(new Vertex(x2,y2,z2));
-            sphere->pushNormal(normalcalc(x2,y2,z2));
-            sphere->pushTexture(new Vertex(j*texU + texU,i*texV + texV,0));
-
-
-            sphere->pushVertex(new Vertex(x2,y2,z2));
-            sphere->pushNormal(normalcalc(x2,y2,z2));
-            sphere->pushTexture(new Vertex(j*texU,i*texV + texV,0));
-
-            sphere->pushVertex(new Vertex(x1,y1,z1));
-            sphere->pushNormal(normalcalc(x1,y1,z1));
             sphere->pushTexture(new Vertex(j*texU,i*texV,0));
 
 
-            sphere->pushVertex(new Vertex(x3,y3,z3));
-            sphere->pushNormal(normalcalc(x0,y0,z0));
+
+
+            sphere->pushVertex(new Vertex(x1,y1,z1));
+            sphere->pushNormal(normalcalc(x1,y1,z1));
+            sphere->pushTexture(new Vertex(j*texU,i*texV + texV,0));
+
+
+
+
+            sphere->pushVertex(new Vertex(x2,y2,z2));
+            sphere->pushNormal(normalcalc(x2,y2,z2));
             sphere->pushTexture(new Vertex(j*texU + texU,i*texV,0));
+
+
+
+
+
+            sphere->pushVertex(new Vertex(x2,y2,z2));
+            sphere->pushNormal(normalcalc(x2,y2,z2));
+            sphere->pushTexture(new Vertex(j*texU + texU,i*texV,0));
+
+
+
+
+            sphere->pushVertex(new Vertex(x1,y1,z1));
+            sphere->pushNormal(normalcalc(x1,y1,z1));
+            sphere->pushTexture(new Vertex(j*texU,i*texV + texV,0));
+
+
+            sphere->pushVertex(new Vertex(x3,y3,z3));
+            sphere->pushNormal(normalcalc(x3,y3,z3));
+            sphere->pushTexture(new Vertex(j*texU + texU,i*texV + texV,0));
 
 
 

@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
 #include "Parser.h"
 
 Group* child_of(Group* parent){
@@ -42,21 +43,17 @@ vector<Shape*> parse_models(XMLElement* element){
     for(element = element->FirstChildElement(); element; element = element->NextSiblingElement()){
         if(!strcmp(element->Name(),"model")){
             modelName = element->Attribute("file");
-            Shape* shape;
-
-            if (element->Attribute("texture")){
-                //TODO FAZER ESTA FUNÇAO
-                // shape.loadTexture(element->Attribute("texture"));
+            Shape *s = read_file(modelName);
+            if (s->getSize()){
+                if(element->Attribute("texture")){
+                    s->loadTexture(element->Attribute("texture"));
+                }
             }
-            else{
-                shape = read_file(modelName);
-            }
-
-            models.push_back(shape);
+            s->setUp();
+            models.push_back(s);
             cout << "Model found: " << modelName << "." << endl;
         }
     }
-
     return models;
 }
 
@@ -106,7 +103,6 @@ Shape* read_file(string fileName) {
     }
 
     file.close();
-
     Shape* result = new Shape(vertexes, normals, textures);
 
     return result;
