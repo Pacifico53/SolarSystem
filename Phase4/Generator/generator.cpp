@@ -163,7 +163,7 @@ void writeFile(Shape* s, string f_path){
         file << tsize << endl;
         vector<Vertex *> texture = s->getTexture();
         for (Vertex *t: texture) {
-            sprintf(buff, "%f %f %f\n", t->getX(), t->getY(), t->getZ());
+            sprintf(buff, "%f %f\n", t->getX(), t->getY());
             file << buff;
         }
     }

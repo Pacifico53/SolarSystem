@@ -3,7 +3,9 @@
 
 #include <string>
 #include <vector>
+#include <IL/il.h>
 #include <GL/gl.h>
+#include <GL/glut.h>
 
 #include "Vertex.h"
 
@@ -26,6 +28,7 @@ class Shape{
         void getVertex(int i, Vertex** v);
         void pushNormal(Vertex* v);
         void pushTexture(Vertex* v);
+        void loadTexture(string texture_file);
         void reverse();
         int getNormSize();
         int getTexSize();

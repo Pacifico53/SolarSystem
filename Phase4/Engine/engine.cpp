@@ -144,6 +144,9 @@ void renderScene() {
     glEnable(GL_CULL_FACE);
     glPolygonMode(GL_FRONT_AND_BACK, mode);
 
+    ilEnable(IL_ORIGIN_SET);
+    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
+
     glRotatef(angleX, 0,1,0);
     glRotatef(angleY, 0,0,1);
 
@@ -211,27 +214,9 @@ void keyBinds(unsigned char key, int x, int y){
     spherical2Cartesian();
 }
 
-void initScene(Group* scene){
-    vector<Shape*> shapes = scene->getShapes();
-
-    for (Shape* s : shapes){
-        s->setUp();
-    }
-
-    vector<Group*> childs = scene->getChildren();
-    for (Group* c : childs){
-        initScene(c);
-    }
-}
-
 int main(int argc, char **argv) {
     string line;
 
-    if(argc != 2){
-        help_menu();
-    }
-    else
-        scene = parseXML(argv[1]);
 
     spherical2Cartesian();
     // init GLUT and the window
@@ -241,11 +226,10 @@ int main(int argc, char **argv) {
     glutInitWindowSize(900,800);
     glutCreateWindow("Phase3");
     glewInit();
+    ilInit();
 
-    // Required callback registry
-    glutDisplayFunc(renderScene);
-    glutReshapeFunc(changeSize);
-    glutIdleFunc(renderScene);
+
+
 
 
     // put here the registration of the keyboard callbacks
@@ -254,8 +238,23 @@ int main(int argc, char **argv) {
     //  OpenGL settings
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
+    glEnable(GL_TEXTURE_2D);
     glEnableClientState(GL_VERTEX_ARRAY);
-    initScene(scene);
+    glEnableClientState(GL_NORMAL_ARRAY);
+    glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+    glEnable(GL_NORMALIZE);
+
+    if(argc != 2){
+        help_menu();
+    }
+    else {
+        scene = parseXML(argv[1]);
+    }
+
+    // Required callback registry
+    glutDisplayFunc(renderScene);
+    glutReshapeFunc(changeSize);
+    glutIdleFunc(renderScene);
 
     // enter GLUT's main cycle
     glutMainLoop();

@@ -1,6 +1,8 @@
 #include <GL/glew.h>
 #include <GL/glut.h>
 #include <algorithm>
+#include <iostream>
+
 #include "Shape.h"
 
 using std::vector;
@@ -11,10 +13,10 @@ Shape::Shape(vector<Vertex*> list){
     vertexes = list;
 }
 
-Shape::Shape(vector<Vertex*> vertexes, vector<Vertex*> normal, vector<Vertex*> texture){
-    vertexes = vertexes;
-    normal = normal;
-    texture = texture;
+Shape::Shape(vector<Vertex*> vertexes1, vector<Vertex*> normal1, vector<Vertex*> texture1){
+    vertexes = vertexes1;
+    normal = normal1;
+    texture = texture1;
     setUp();
 }
 
@@ -134,6 +136,34 @@ void Shape::draw(){
     //Draw all Triangles at once
     glDrawArrays(GL_TRIANGLES, 0, vertexes.size()*3);
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+
+void Shape::loadTexture(string texture_file) {
+
+    string path = "../Textures/" + texture_file;
+    unsigned int tw,th;
+    unsigned char *texData;
+
+    unsigned int ima[1];
+
+    cout << "Ficheiro Texture Encontrado!" << endl;
+    ilGenImages(1, ima);
+    ilBindImage(ima[0]);
+    ilLoadImage((ILstring)path.c_str());
+    tw = ilGetInteger(IL_IMAGE_WIDTH);
+    th = ilGetInteger(IL_IMAGE_HEIGHT);
+    ilConvertImage(IL_RGBA, IL_UNSIGNED_BYTE);
+    texData = ilGetData();
+
+    glGenTextures(1, &text);
+    glBindTexture(GL_TEXTURE_2D, text);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
+    cout << "Ficheiro Texture Encontrado!" << endl;
+
 }
 
 Shape::~Shape(void){

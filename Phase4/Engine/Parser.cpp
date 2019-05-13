@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
 #include "Parser.h"
 
 Group* child_of(Group* parent){
@@ -42,15 +43,26 @@ vector<Shape*> parse_models(XMLElement* element){
     for(element = element->FirstChildElement(); element; element = element->NextSiblingElement()){
         if(!strcmp(element->Name(),"model")){
             modelName = element->Attribute("file");
-            vector<Vertex*> verts = read_file(modelName);
-            Shape *s = new Shape(verts);
+            Shape *s = read_file(modelName);
+
+
+            if (s->getSize()){
+                if(element->Attribute("texture")){
+                    s->loadTexture(element->Attribute("texture"));
+                }
+
+            }
+            s->setUp();
             models.push_back(s);
+
             cout << "Model found: " << modelName << "." << endl;
         }
     }
 
     return models;
 }
+
+
 
 
 void find_elements(XMLElement* element, Group* g){
@@ -85,25 +97,46 @@ void find_elements(XMLElement* element, Group* g){
 }
 
 //Reads the .3d file and returns a vector of all the vertexes found
-vector<Vertex*> read_file(string fileName){
-    vector<Vertex*> result;
+Shape* read_file(string fileName){
+    vector<Vertex*> vertex,normal,texture;
     string line;
     string pathToFile = "../files3d/" + fileName;
-
+    int i;
     ifstream file(pathToFile);
+    Shape* s;
 
     if (!file.fail()){
-        while(getline(file, line)){
-            Vertex *v = new Vertex(line);
-            result.push_back(v);
-        }
-    }
+        getline(file, line);
+        int n_vertexes = atoi(line.c_str());
 
+        for (i=0; i<n_vertexes; i++) {
+            getline(file,line);
+            Vertex *v = new Vertex(line);
+            vertex.push_back(v);
+        }
+        getline(file,line);
+        int n_normal = atoi(line.c_str());
+        for(i=0; i<n_normal; i++){
+            getline(file,line);
+            Vertex *v = new Vertex(line);
+            normal.push_back(v);
+        }
+
+        getline(file,line);
+        int n_texture = atoi(line.c_str());
+        for(i=0; i<n_texture; i++){
+            getline(file,line);
+            Vertex *v = new Vertex(line,0);
+            texture.push_back(v);
+        }
+
+        s = new Shape(vertex,normal,texture);
+    }
     else {
         cout << "Failed to open file " << fileName << "." << endl;
     }
 
-    return result;
+    return s;
 }
 
 //Parses through the xml file and returns the first Group found

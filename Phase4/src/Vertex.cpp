@@ -22,6 +22,17 @@ Vertex::Vertex(std::string str){
     z = std::stof(str,&pos);
 }
 
+Vertex::Vertex(std::string str, float zz){
+    size_t pos;
+
+    x = std::stof(str,&pos);
+    str.erase(0,pos+1);
+    y = std::stof(str,&pos);
+
+    z = zz;
+
+}
+
 float Vertex::getX(){
     return x;
 }

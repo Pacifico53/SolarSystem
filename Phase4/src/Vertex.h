@@ -15,6 +15,7 @@ class Vertex {
         Vertex(float xx, float yy, float zz);
         Vertex(const Vertex *v);
         Vertex(std::string str);
+        Vertex(std::string str, float z);
         float getX();
         float getY();
         float getZ();
