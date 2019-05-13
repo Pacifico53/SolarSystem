@@ -1,7 +1,6 @@
 #ifndef _PARSER_H
 #define _PARSER_H
 
-
 #include "../src/Group.h"
 #include "tinyxml2.h"
 
@@ -15,6 +14,7 @@ void parse_color(XMLElement*, Group*);
 vector<Shape*> parse_models(XMLElement*);
 void find_elements(XMLElement*, Group*);
 Shape* read_file(string);
+void parse_lights(XMLElement*, Group*);
 Group* parseXML(char*);
 
 #endif

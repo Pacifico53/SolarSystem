@@ -13,7 +13,6 @@ Shape::Shape(vector<Vertex*> list){
     vertexes = list;
 }
 
-<<<<<<< HEAD
 Shape::Shape(vector<Vertex*> v, vector<Vertex*> n, vector<Vertex*> t){
     vertexes = v;
     normal = n;
@@ -73,7 +72,6 @@ vector<Vertex*> Shape::getTexture(){
 GLuint* Shape::getVertexBuffer() {
     return buffer;
 }
-
 
 void Shape::setUp(){
     float *vertex_array = (float*) malloc(sizeof(float) * vertexes.size() * 3);

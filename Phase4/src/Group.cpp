@@ -9,10 +9,11 @@
 
 Group::Group() = default;
 
-Group::Group(vector<Shape*> listShape, vector<Group*> listGroup, vector<Action*> listAction){
+Group::Group(vector<Shape*> listShape, vector<Group*> listGroup, vector<Action*> listAction, vector<Light*> listLights){
     shapes = listShape;
     groups = listGroup;
     actions = listAction;
+    lights = listLights;
 }
 
 vector<Shape*> Group::getShapes(){
@@ -27,6 +28,10 @@ vector<Action*> Group::getActions(){
     return actions;
 }
 
+vector<Light*> Group::getLights() {
+    return lights;
+}
+
 void Group::setShapes(vector<Shape*> listShape){
     shapes = listShape;
 }
@@ -37,6 +42,10 @@ void Group::setChilds(vector<Group*> listGroup){
 
 void Group::setActions(vector<Action*> listAction){
     actions = listAction;
+}
+
+void Group::setLights(vector<Light *> listLights) {
+    lights = listLights;
 }
 
 void Group::addShape(Shape* shape) {

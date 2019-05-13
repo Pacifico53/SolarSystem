@@ -3,6 +3,7 @@
 #include <sstream>
 #include <stdlib.h>
 #include "Parser.h"
+#include "../src/Light.h"
 
 Group* child_of(Group* parent){
     Group* child = new Group();
@@ -108,6 +109,24 @@ Shape* read_file(string fileName) {
     return result;
 }
 
+void parse_lights(XMLElement* element, Group* g){
+    vector<Light*> lights;
+    bool pointBool;
+    float x=0,y=0,z=0;
+
+    if(!strcmp(element->Name(),"light")){
+        pointBool = element->Attribute("type") && !strcmp(element->Attribute("type"), "POINT");
+
+        element->QueryFloatAttribute("X", &x);
+        element->QueryFloatAttribute("Y", &y);
+        element->QueryFloatAttribute("Z", &z);
+
+        Light* l= new Light(pointBool, new Vertex(x,y,z));
+        lights.push_back(l);
+    }
+
+    g->setLights(lights);
+}
 
 void find_elements(XMLElement* element, Group* g){
     XMLElement* current = element;
@@ -123,6 +142,9 @@ void find_elements(XMLElement* element, Group* g){
         if(!shapes.empty()){
             g->setShapes(shapes);
         }
+    }
+    else if(!strcmp(element->Name(),"lights")) {
+        parse_lights(element, g);
     }
     else if(!strcmp(element->Name(),"colour"))
         parse_color(element, g);
@@ -147,6 +169,10 @@ Group* parseXML(char* fileName) {
     Group *group = new Group();
 
     if(docXML.LoadFile(fileName) == 0){
+        element = docXML.FirstChildElement("scene")->FirstChildElement("lights");
+        if(element)
+            parse_lights(element,group);
+
         element = docXML.FirstChildElement("scene")->FirstChildElement("group");
         find_elements(element,group);
     }
