@@ -14,11 +14,13 @@ class Shape{
     vector<Vertex*> vertexes;
     vector<Vertex*> normal;
     vector<Vertex*> texture;
-    GLuint buffer[3];
+    GLuint text, buffer[3];
+
 
     public:
         explicit Shape();
         explicit Shape(vector<Vertex*>);
+        explicit Shape(vector<Vertex*> vertexes, vector<Vertex*> normal, vector<Vertex*> texture);
         void pushVertex(Vertex* v);
         void pushShape(Shape* s);
         void getVertex(int i, Vertex** v);
