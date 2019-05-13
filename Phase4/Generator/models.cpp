@@ -266,6 +266,7 @@ Shape* createTorus(float innerRadius, float outerRadius, int slices, int rings){
 
     return torus;
 }
+
 Vertex* normalcalc(float x,float y, float z){
     float l;
     l = sqrt(x*x + y*y + z*z);

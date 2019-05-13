@@ -42,9 +42,17 @@ vector<Shape*> parse_models(XMLElement* element){
     for(element = element->FirstChildElement(); element; element = element->NextSiblingElement()){
         if(!strcmp(element->Name(),"model")){
             modelName = element->Attribute("file");
-            vector<Vertex*> verts = read_file(modelName);
-            Shape *s = new Shape(verts);
-            models.push_back(s);
+            Shape* shape;
+
+            if (element->Attribute("texture")){
+                //TODO FAZER ESTA FUNÇAO
+                // shape.loadTexture(element->Attribute("texture"));
+            }
+            else{
+                shape = read_file(modelName);
+            }
+
+            models.push_back(shape);
             cout << "Model found: " << modelName << "." << endl;
         }
     }
@@ -52,9 +60,60 @@ vector<Shape*> parse_models(XMLElement* element){
     return models;
 }
 
+//Reads the .3d file and returns a vector of all the vertexes found
+Shape* read_file(string fileName) {
+    string line;
+    string pathToFile = "../files3d/" + fileName;
+
+    vector<Vertex*> vertexes;
+    vector<Vertex*> normals;
+    vector<Vertex*> textures;
+
+    int i = 0;
+
+    ifstream file(pathToFile);
+
+    if (!file.fail()){
+        getline(file, line);
+        int size_vertex = atoi(line.c_str());
+
+        for (i = 0; i < size_vertex; i++) {
+            getline(file, line);
+            Vertex* vv = new Vertex(line);
+            vertexes.push_back(vv);
+        }
+
+        getline(file, line);
+        int size_normals = atoi(line.c_str());
+
+        for (i = 0; i < size_normals; i++) {
+            getline(file, line);
+            Vertex* vn = new Vertex(line);
+            normals.push_back(vn);
+        }
+
+        getline(file, line);
+        int size_textures = atoi(line.c_str());
+
+        for (i = 0; i < size_textures; i++) {
+            getline(file, line);
+            Vertex* vt = new Vertex(line);
+            textures.push_back(vt);
+        }
+    }
+    else {
+        cout << "Failed to open file " << fileName << "." << endl;
+    }
+
+    file.close();
+
+    Shape* result = new Shape(vertexes, normals, textures);
+
+    return result;
+}
+
 
 void find_elements(XMLElement* element, Group* g){
-
     XMLElement* current = element;
 
     if(!strcmp(element->Name(),"translate"))
@@ -82,28 +141,6 @@ void find_elements(XMLElement* element, Group* g){
     current = current->NextSiblingElement();
     if(current)
         find_elements(current,g);
-}
-
-//Reads the .3d file and returns a vector of all the vertexes found
-vector<Vertex*> read_file(string fileName){
-    vector<Vertex*> result;
-    string line;
-    string pathToFile = "../files3d/" + fileName;
-
-    ifstream file(pathToFile);
-
-    if (!file.fail()){
-        while(getline(file, line)){
-            Vertex *v = new Vertex(line);
-            result.push_back(v);
-        }
-    }
-
-    else {
-        cout << "Failed to open file " << fileName << "." << endl;
-    }
-
-    return result;
 }
 
 //Parses through the xml file and returns the first Group found

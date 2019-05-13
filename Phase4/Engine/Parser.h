@@ -13,7 +13,7 @@ void parse_scale(XMLElement*, Group*);
 void parse_color(XMLElement*, Group*);
 vector<Shape*> parse_models(XMLElement*);
 void find_elements(XMLElement*, Group*);
-vector<Vertex*> read_file(string);
+Shape* read_file(string fileName);
 Group* parseXML(char*);
 
 #endif

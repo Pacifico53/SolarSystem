@@ -11,10 +11,10 @@ Shape::Shape(vector<Vertex*> list){
     vertexes = list;
 }
 
-Shape::Shape(vector<Vertex*> vertexes, vector<Vertex*> normal, vector<Vertex*> texture){
-    vertexes = vertexes;
-    normal = normal;
-    texture = texture;
+Shape::Shape(vector<Vertex*> v, vector<Vertex*> n, vector<Vertex*> t){
+    vertexes = v;
+    normal = n;
+    texture = t;
     setUp();
 }
 
@@ -46,6 +46,7 @@ void Shape::reverse() {
 int Shape::getSize() {
     return vertexes.size();
 }
+
 int Shape::getNormSize(){
     return normal.size();
 }
@@ -72,7 +73,6 @@ GLuint* Shape::getVertexBuffer() {
 
 
 void Shape::setUp(){
-
     float *vertex_array = (float*) malloc(sizeof(float) * vertexes.size() * 3);
     float *normal_array = (float*) malloc(sizeof(float) * normal.size() * 3);
     float *texture_array = (float*) malloc(sizeof(float) * texture.size() * 2);
@@ -114,8 +114,6 @@ void Shape::setUp(){
 }
 
 void Shape::draw(){
-
-
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
     //Set the Vertex Pointer to the vertex buffer
     glVertexPointer(3, GL_FLOAT, 0, 0);
@@ -137,6 +135,4 @@ void Shape::draw(){
 }
 
 Shape::~Shape(void){
-
 }
-
