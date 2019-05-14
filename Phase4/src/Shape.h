@@ -8,11 +8,13 @@
 #include <GL/glut.h>
 
 #include "Vertex.h"
+#include "Material.h"
 
 using namespace std;
 
 class Shape{
 
+    Material* material;
     vector<Vertex*> vertexes;
     vector<Vertex*> normal;
     vector<Vertex*> texture;
@@ -29,6 +31,7 @@ class Shape{
         void pushNormal(Vertex* v);
         void pushTexture(Vertex* v);
         void loadTexture(string texture_file);
+        void setMaterial(Material* m);
         void reverse();
         int getNormSize();
         int getTexSize();
@@ -36,6 +39,7 @@ class Shape{
         vector<Vertex*> getVertexes();
         vector<Vertex*> getNormal();
         vector<Vertex*> getTexture();
+        Material* getMaterial();
         GLuint* getVertexBuffer();
         void setUp();
         void draw();

@@ -15,6 +15,7 @@ vector<Shape*> parse_models(XMLElement*);
 void find_elements(XMLElement*, Group*);
 Shape* read_file(string);
 void parse_lights(XMLElement*, Group*);
+void parse_material(XMLElement*, Shape*);
 Group* parseXML(char*);
 
 #endif

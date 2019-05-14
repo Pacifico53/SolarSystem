@@ -20,8 +20,8 @@ Shape::Shape(vector<Vertex*> v, vector<Vertex*> n, vector<Vertex*> t){
     setUp();
 }
 
-void Shape::pushVertex(Vertex *v) {
-    vertexes.push_back(v);
+void Shape::setMaterial(Material *m){
+    material = m;
 }
 
 void Shape::pushShape(Shape *s) {
@@ -43,6 +43,10 @@ void Shape::pushTexture(Vertex* v){
 
 void Shape::reverse() {
     std::reverse(vertexes.begin(),vertexes.end());
+}
+
+Material* Shape::getMaterial() {
+    return material;
 }
 
 int Shape::getSize() {

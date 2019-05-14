@@ -50,12 +50,43 @@ vector<Shape*> parse_models(XMLElement* element){
                     s->loadTexture(element->Attribute("texture"));
                 }
             }
+
+            parse_material(element, s);
             s->setUp();
             models.push_back(s);
             cout << "Model found: " << modelName << "." << endl;
         }
     }
     return models;
+}
+
+void parse_material(XMLElement* element, Shape* shape){
+    float diff[4] = {0.8, 0.8, 0.8, 1};
+    float amb[4] = {0.2, 0.2, 0.2, 1};
+    float spec[4] = {0, 0, 0, 1};
+    float emi[4] = {0, 0, 0, 1};
+    float shin = 0;
+
+    element->QueryFloatAttribute("diffR", &diff[0]);
+    element->QueryFloatAttribute("diffG", &diff[1]);
+    element->QueryFloatAttribute("diffB", &diff[2]);
+
+    element->QueryFloatAttribute("specR", &spec[0]);
+    element->QueryFloatAttribute("specG", &spec[1]);
+    element->QueryFloatAttribute("specB", &spec[2]);
+
+    element->QueryFloatAttribute("emiR", &emi[0]);
+    element->QueryFloatAttribute("emiG", &emi[1]);
+    element->QueryFloatAttribute("emiB", &emi[2]);
+
+    element->QueryFloatAttribute("ambR", &amb[0]);
+    element->QueryFloatAttribute("ambG", &amb[1]);
+    element->QueryFloatAttribute("ambB", &amb[2]);
+
+    element->QueryFloatAttribute("shini", &shin);
+
+    Material* m = new Material(diff, amb, spec, emi, shin);
+    shape->setMaterial(m);
 }
 
 //Reads the .3d file and returns a vector of all the vertexes found
@@ -114,16 +145,14 @@ void parse_lights(XMLElement* element, Group* g){
     bool pointBool;
     float x=0,y=0,z=0;
 
-    if(!strcmp(element->Name(),"light")){
-        pointBool = element->Attribute("type") && !strcmp(element->Attribute("type"), "POINT");
+    pointBool = element->Attribute("type") && !strcmp(element->Attribute("type"), "POINT");
 
-        element->QueryFloatAttribute("X", &x);
-        element->QueryFloatAttribute("Y", &y);
-        element->QueryFloatAttribute("Z", &z);
+    element->QueryFloatAttribute("X", &x);
+    element->QueryFloatAttribute("Y", &y);
+    element->QueryFloatAttribute("Z", &z);
 
-        Light* l= new Light(pointBool, new Vertex(x,y,z));
-        lights.push_back(l);
-    }
+    Light* l= new Light(pointBool, new Vertex(x,y,z));
+    lights.push_back(l);
 
     g->setLights(lights);
 }
