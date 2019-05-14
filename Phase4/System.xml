@@ -7,4 +7,35 @@
             <model file="sphere.3d" texture="sun.jpg" />
         </models>
     </group>
+    <group>
+        <translate time="300">
+            <point X="120.5005" Y="0" Z="0"/>
+            <point X="85.20672" Y="0" Z="85.20672"/>
+            <point X="0" Y="0" Z="120.5005"/>
+            <point X="-85.20672" Y="0" Z="85.20672"/>
+            <point X="-120.5005" Y="0" Z="0"/>
+            <point X="-85.20672" Y="0" Z="-85.20672"/>
+            <point X="0" Y="0" Z="-120.5005"/>
+            <point X="85.20672" Y="0" Z="-85.20672"/>
+        </translate>
+        <group>
+            <rotate time="39" X="0" Y="1" Z="0"/>
+            <colour R="240" G="232" B="170" />
+            <scale X="1.995" Y="1.995" Z="1.995" />
+            <models>
+                <model file="sphere.3d" texture="saturn.jpg" />
+            </models>
+            <!--ANEL-->
+            <group>
+                <rotate angle="75" X="1" Y="0" Z="0"/>
+                <colour R="79" G="52" B="26" />
+                <scale X="0.35" Y="0.35" Z="0.001"/>
+                <models>
+                    <model file="torus.3d" texture="saturnring.jpg" />
+                </models>
+            </group>
+
+        </group>
+
+    </group>
 </scene>

@@ -126,7 +126,7 @@ Shape* read_file(string fileName) {
 
         for (i = 0; i < size_textures; i++) {
             getline(file, line);
-            Vertex* vt = new Vertex(line);
+            Vertex* vt = new Vertex(line,0);
             textures.push_back(vt);
         }
     }

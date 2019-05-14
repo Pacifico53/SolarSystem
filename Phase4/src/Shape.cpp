@@ -7,7 +7,7 @@
 
 using std::vector;
 
-Shape::Shape(){};
+Shape::Shape(){}
 
 Shape::Shape(vector<Vertex*> list){
     vertexes = list;
@@ -30,6 +30,10 @@ void Shape::pushShape(Shape *s) {
 
 void Shape::getVertex(int i, Vertex **v) {
     *v = vertexes.at(i);
+}
+
+void Shape::pushVertex(Vertex* v){
+    vertexes.push_back(v);
 }
 
 void Shape::pushNormal(Vertex* v){

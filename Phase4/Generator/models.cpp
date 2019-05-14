@@ -242,6 +242,9 @@ Shape* createTorus(float innerRadius, float outerRadius, int slices, int rings){
     float sideSize = (2*M_PI) / slices;
     float ringSize = (2*M_PI) / rings;
 
+    float sideText = 1 / (float) slices;
+    float ringText = 1 / (float) rings;
+
     Shape* torus = new Shape();
 
     int i, j;
@@ -266,14 +269,32 @@ Shape* createTorus(float innerRadius, float outerRadius, int slices, int rings){
             float z1 = innerRadius * sin((j+1)*sideSize);
 
             torus->pushVertex(new Vertex(x0*r0, y0*r0, z0));
+            torus->pushNormal(new Vertex(x0 * cos(j*sideSize),y0 * cos(j*sideSize), sin(j * sideSize) ));
+            torus->pushTexture(new Vertex(i*ringText,j*sideText,0));
+
             torus->pushVertex(new Vertex(x1*r0, y1*r0, z0));
-            torus->pushVertex(new Vertex(x0*r1, y0*r1, z1));
+            torus->pushNormal(new Vertex(x1*cos(j*sideSize),y1*cos(j*sideSize),sin(j*sideSize)));
+            torus->pushTexture(new Vertex((i+1)*ringText,j*sideText,0));
 
             torus->pushVertex(new Vertex(x0*r1, y0*r1, z1));
+            torus->pushNormal(new Vertex(x0*cos((j+1) * sideSize), y0* cos((j+1)* sideSize), sin((j+1)*sideSize)));
+            torus->pushTexture(new Vertex(i*ringText,(j+1)*sideText,0));
+
+            torus->pushVertex(new Vertex(x0*r1, y0*r1, z1));
+            torus->pushNormal(new Vertex(x0*cos((j+1)*sideSize), y0*cos((j+1)*sideSize),sin((j+1)*sideSize)));
+            torus->pushTexture(new Vertex(i*ringText,(j+1)*sideText,0));
+
             torus->pushVertex(new Vertex(x1*r0, y1*r0, z0));
+            torus->pushNormal(new Vertex(x1*cos(j*sideSize),y1*cos(j*sideSize),sin(j*sideSize)));
+            torus->pushTexture(new Vertex((i+1)*ringText,j*sideText,0));
+
             torus->pushVertex(new Vertex(x1*r1, y1*r1, z1));
-
+            torus->pushNormal(new Vertex(x1 * cos((j+1)*sideSize),y1*cos((j+1)* sideSize),sin((j+1)*sideSize)));
+            torus->pushTexture(new Vertex((i+1)*ringText,(j+1)*sideText,0));
         }
+
+
+
     }
 
     return torus;
