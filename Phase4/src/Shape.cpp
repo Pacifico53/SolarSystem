@@ -156,7 +156,7 @@ void Shape::loadTexture(string texture_file) {
 
     unsigned int ima[1];
 
-    cout << "Ficheiro Texture Encontrado!" << endl;
+    cout << "Texture \"" << texture_file <<"\" found."<< endl;
     ilGenImages(1, ima);
     ilBindImage(ima[0]);
     ilLoadImage((ILstring)path.c_str());
@@ -172,7 +172,6 @@ void Shape::loadTexture(string texture_file) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, tw, th, 0, GL_RGBA, GL_UNSIGNED_BYTE, texData);
-    cout << "Ficheiro Texture Encontrado!" << endl;
 }
 
 Shape::~Shape(void){

@@ -152,7 +152,6 @@ void parse_lights(XMLElement* element, Group* g){
             element->QueryFloatAttribute("X", &x);
             element->QueryFloatAttribute("Y", &y);
             element->QueryFloatAttribute("Z", &z);
-            cout << "light x=" << x << " y=" << y << " z=" << z << " p=" << pointBool << endl;
             Light *l = new Light(pointBool, new Vertex(x, y, z));
             lights.push_back(l);
         }
