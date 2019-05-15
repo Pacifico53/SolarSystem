@@ -1,7 +1,3 @@
-//
-// Created by pacifico on 14-05-2019.
-//
-
 #include "Material.h"
 #include <GL/glut.h>
 

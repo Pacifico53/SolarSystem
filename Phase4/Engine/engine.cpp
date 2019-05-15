@@ -57,7 +57,6 @@ void help_menu(){
 }
 
 void changeSize(int w, int h) {
-
     // Prevent a divide by zero, when window is too short
     // (you cant make a window with zero width).
     if(h == 0)
@@ -103,10 +102,7 @@ void displayFPS(){
 
 }
 
-
-
 void render(Group* g){
-    float x, y, z;
     glPushMatrix();
 
     vector<Light*> lights = g->getLights();
@@ -120,13 +116,11 @@ void render(Group* g){
     }
 
     vector<Shape*> shapes = g->getShapes();
-
     for(auto &shape : shapes){
         shape->draw();
     }
 
     vector<Group*> children = g->getChildren();
-
     for (auto &child : children) {
         render(child);
     }
@@ -135,7 +129,6 @@ void render(Group* g){
 }
 
 void renderScene() {
-
     // clear buffers
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -170,9 +163,7 @@ void renderScene() {
         glVertex3f(0.0, 0.0, 10.0 + az);
     glEnd();
 
-
     // Draw shapes
-
     glEnable(GL_LIGHTING);
     render(scene);
     glDisable(GL_LIGHTING);
@@ -227,20 +218,15 @@ void keyBinds(unsigned char key, int x, int y){
 int main(int argc, char **argv) {
     string line;
 
-
     spherical2Cartesian();
     // init GLUT and the window
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DEPTH|GLUT_DOUBLE|GLUT_RGBA);
     glutInitWindowPosition(10,100);
     glutInitWindowSize(900,800);
-    glutCreateWindow("Phase3");
+    glutCreateWindow("Phase4");
     glewInit();
     ilInit();
-
-
-
-
 
     // put here the registration of the keyboard callbacks
     glutKeyboardFunc( keyBinds );

@@ -30,7 +30,6 @@ void parse_scale(XMLElement* element, Group* g){
     g->addAction(scale);
 }
 
-
 void parse_color(XMLElement* element, Group* g){
     Color* color = new Color();
     color->parse(element);
@@ -145,15 +144,19 @@ void parse_lights(XMLElement* element, Group* g){
     bool pointBool;
     float x=0,y=0,z=0;
 
-    pointBool = element->Attribute("type") && !strcmp(element->Attribute("type"), "POINT");
+    element = element->FirstChildElement();
+    for(;element;element=element->NextSiblingElement()) {
+        if (!strcmp(element->Name(), "light")) {
+            pointBool = element->Attribute("type") && !strcmp(element->Attribute("type"), "POINT");
 
-    element->QueryFloatAttribute("X", &x);
-    element->QueryFloatAttribute("Y", &y);
-    element->QueryFloatAttribute("Z", &z);
-
-    Light* l= new Light(pointBool, new Vertex(x,y,z));
-    lights.push_back(l);
-
+            element->QueryFloatAttribute("X", &x);
+            element->QueryFloatAttribute("Y", &y);
+            element->QueryFloatAttribute("Z", &z);
+            cout << "light x=" << x << " y=" << y << " z=" << z << " p=" << pointBool << endl;
+            Light *l = new Light(pointBool, new Vertex(x, y, z));
+            lights.push_back(l);
+        }
+    }
     g->setLights(lights);
 }
 
@@ -210,3 +213,4 @@ Group* parseXML(char* fileName) {
 
     return group;
 }
+
