@@ -98,28 +98,20 @@ Shape* createSphere(float r, int slices, int stacks){
             sphere->pushTexture(new Vertex(j*texU,i*texV,0));
 
 
-
-
             sphere->pushVertex(new Vertex(x1,y1,z1));
             sphere->pushNormal(normalcalc(x1,y1,z1));
             sphere->pushTexture(new Vertex(j*texU,i*texV + texV,0));
 
 
-
-
             sphere->pushVertex(new Vertex(x2,y2,z2));
             sphere->pushNormal(normalcalc(x2,y2,z2));
             sphere->pushTexture(new Vertex(j*texU + texU,i*texV,0));
 
 
 
-
-
             sphere->pushVertex(new Vertex(x2,y2,z2));
             sphere->pushNormal(normalcalc(x2,y2,z2));
             sphere->pushTexture(new Vertex(j*texU + texU,i*texV,0));
-
-
 
 
             sphere->pushVertex(new Vertex(x1,y1,z1));
@@ -130,9 +122,6 @@ Shape* createSphere(float r, int slices, int stacks){
             sphere->pushVertex(new Vertex(x3,y3,z3));
             sphere->pushNormal(normalcalc(x3,y3,z3));
             sphere->pushTexture(new Vertex(j*texU + texU,i*texV + texV,0));
-
-
-
         }
     }
 
@@ -292,9 +281,6 @@ Shape* createTorus(float innerRadius, float outerRadius, int slices, int rings){
             torus->pushNormal(new Vertex(x1 * cos((j+1)*sideSize),y1*cos((j+1)* sideSize),sin((j+1)*sideSize)));
             torus->pushTexture(new Vertex((i+1)*ringText,(j+1)*sideText,0));
         }
-
-
-
     }
 
     return torus;

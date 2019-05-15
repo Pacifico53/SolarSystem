@@ -7,21 +7,18 @@
             </lights>
             <scale X="-300" Y="-300" Z="-300" />
             <models>
-                <model file="sphere.3d" texture="stars.jpg" emiX="1" emiY="1" emiZ="1" shiny="128"/>
+                <model file="sphere.3d" texture="stars.png" emiR="1" emiG="1" emiB="1" shiny="58"/>
             </models>
         </group>
     </group>
 
     <!--SOL-->
     <group>
-        <lights>
-            <light type="POINT" X="0" Y="0" Z="0"/>
-        </lights>
         <rotate time="60" X="0" Y="1" Z="0"/>
         <colour R="251" G="119" B="9" />
         <scale X="10" Y="10" Z="10" />
         <models>
-            <model file="sphere.3d" texture="sun.jpg" emiR="1" emiG="1" emiB="1" shiny="50"/>
+            <model file="sphere.3d" texture="sun.jpg" emiR="1" emiG="1" emiB="1" shiny="100"/>
         </models>
     </group>
     <!--MERCURIO-->
@@ -40,7 +37,7 @@
         <colour R="128" G="128" B="128" />
         <scale X="0.3525" Y="0.3525" Z="0.3525" />
         <models>
-            <model file="sphere.3d" texture="mercury.jpg" emiX="0" emiY="0" emiZ="0" />
+            <model file="sphere.3d" texture="mercury.jpg" emiR="0" emiG="0" emiB="0" />
         </models>
     </group>
     <!--VENUS-->
@@ -59,7 +56,7 @@
         <colour R="243" G="229" B="171" />
         <scale X="0.8790" Y="0.8790" Z="0.8790" />
         <models>
-            <model file="sphere.3d" texture="venus.jpg" emiX="0" emiY="0" emiZ="0"/>
+            <model file="sphere.3d" texture="venus.jpg" emiR="0" emiG="0" emiB="0"/>
         </models>
     </group>
     <!--TERRA-->
@@ -79,7 +76,7 @@
             <colour R="0" G="50" B="255" />
             <scale X="0.8865" Y="0.8865" Z="0.8865" />
             <models>
-                <model file="sphere.3d" texture="earth.jpg" emiX="0" emiY="0" emiZ="0"/>
+                <model file="sphere.3d" texture="earth.jpg" emiR="0" emiG="0" emiB="0"/>
             </models>
             <group>
                 <rotate angle="-23" X="0" Y="1" Z="1"/>
@@ -89,7 +86,7 @@
                     <colour R="255" G="255" B="255" />
                     <scale X="0.30" Y="0.30" Z="0.30" />
                     <models>
-                        <model file="sphere.3d" texture="moon.jpg" emiX="0" emiY="0" emiZ="0"/>
+                        <model file="sphere.3d" texture="moon.jpg" emiR="0" emiG="0" emiB="0"/>
                     </models>
                 </group>
             </group>
@@ -112,7 +109,7 @@
             <colour R="200" G="75" B="0" />
             <scale X="0.3720" Y="0.3720" Z="0.3720" />
             <models>
-                <model file="sphere.3d" texture="mars.jpg" emiX="0" emiY="0" emiZ="0"/>
+                <model file="sphere.3d" texture="mars.jpg" emiR="0" emiG="0" emiB="0"/>
             </models>
         </group>
     </group>
@@ -132,7 +129,7 @@
         <colour R="192" G="160" B="100" />
         <scale X="2.25" Y="2.25" Z="2.25" />
         <models>
-            <model file="sphere.3d" texture="jupiter.jpg" emiX="0" emiY="0" emiZ="0" />
+            <model file="sphere.3d" texture="jupiter.jpg" emiR="0" emiG="0" emiB="0" />
         </models>
         <!--SATELITE N.-->
         <group>
@@ -141,7 +138,7 @@
             <colour R="255" G="255" B="255" />
             <scale X="0.05" Y="0.05" Z="0.05" />
             <models>
-                <model file="sphere.3d" texture="pluto.jpg" emiX="0" emiY="0" emiZ="0"/>
+                <model file="sphere.3d" texture="pluto.jpg" emiR="0" emiG="0" emiB="0"/>
             </models>
         </group>
         <!--SATELITE N.-->
@@ -151,7 +148,7 @@
             <colour R="255" G="255" B="255" />
             <scale X="0.035" Y="0.035" Z="0.035" />
             <models>
-                <model file="sphere.3d" texture="pluto.jpg" emiX="0" emiY="0" emiZ="0"/>
+                <model file="sphere.3d" texture="pluto.jpg" emiR="0" emiG="0" emiB="0"/>
             </models>
         </group>
         <!--SATELITE N.-->
@@ -171,7 +168,7 @@
             <colour R="255" G="255" B="255" />
             <scale X="0.11" Y="0.11" Z="0.11" />
             <models>
-                <model file="sphere.3d" texture="pluto.jpg" emiX="0" emiY="0" emiZ="0"/>
+                <model file="sphere.3d" texture="pluto.jpg" emiR="0" emiG="0" emiB="0"/>
             </models>
         </group>
     </group>
@@ -192,7 +189,7 @@
             <colour R="240" G="232" B="170" />
             <scale X="1.995" Y="1.995" Z="1.995" />
             <models>
-                <model file="sphere.3d" texture="saturn.jpg" emiX="0" emiY="0" emiZ="0" />
+                <model file="sphere.3d" texture="saturn.jpg" emiR="0" emiG="0" emiB="0" />
             </models>
             <!--SATELITE N.-->
             <group>
@@ -201,7 +198,7 @@
                 <colour R="255" G="255" B="255" />
                 <scale X="0.15" Y="0.15" Z="0.15" />
                 <models>
-                    <model file="sphere.3d" texture="moon.jpg" emiX="0" emiY="0" emiZ="0"/>
+                    <model file="sphere.3d" texture="moon.jpg" emiR="0" emiG="0" emiB="0"/>
                 </models>
             </group>
             <!--ANEL-->
@@ -210,7 +207,7 @@
                 <colour R="79" G="52" B="26" />
                 <scale X="0.35" Y="0.35" Z="0.001"/>
                 <models>
-                    <model file="torus.3d" texture="saturnring.png" emiX="0" emiY="0" emiZ="0" />
+                    <model file="torus.3d" texture="saturnring.png" emiR="0" emiG="0" emiB="0" />
                 </models>
             </group>
 
@@ -234,7 +231,7 @@
             <colour R="145" G="163" B="176" />
             <scale X="1.290" Y="1.290" Z="1.290" />
             <models>
-                <model file="sphere.3d" texture="uranus.jpg" emiX="0" emiY="0" emiZ="0" />
+                <model file="sphere.3d" texture="uranus.jpg" emiR="0" emiG="0" emiB="0" />
             </models>
         </group>
     </group>
@@ -255,7 +252,7 @@
             <colour R="140" G="160" B="200" />
             <scale X="1.275" Y="1.275" Z="1.275" />
             <models>
-                <model file="sphere.3d" texture="neptune.jpg" emiX="0" emiY="0" emiZ="0"/>
+                <model file="sphere.3d" texture="neptune.jpg" emiR="0" emiG="0" emiB="0"/>
             </models>
             <!--SATELITE N.-->
             <group>
@@ -264,7 +261,7 @@
                 <colour R="255" G="255" B="255" />
                 <scale X="0.15" Y="0.15" Z="0.15" />
                 <models>
-                    <model file="sphere.3d" texture="moon.jpg" emiX="0" emiY="0" emiZ="0"/>
+                    <model file="sphere.3d" texture="moon.jpg" emiR="0" emiG="0" emiB="0"/>
                 </models>
             </group>
         </group>
@@ -290,10 +287,10 @@
             <point X="28.2843" Y="0" Z="-154.246" />
             <point X="36.9552" Y="0" Z="-120.182" />
         </translate>
-        <scale X="1" Y="1" Z="1" />
+        <scale X="0.5" Y="0.5" Z="0.5" />
         <colour R="255" G="255" B="255"/>
         <models>
-            <model file="teapot.3d" texture="Textures/earth.jpg" emiX="0" emiY="0" emiZ="0"/>
+            <model file="sphere.3d" texture="moon.jpg" emiR="0" emiG="0" emiB="0"/>
         </models>
     </group>
 </scene>

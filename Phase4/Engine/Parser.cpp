@@ -202,9 +202,9 @@ Group* parseXML(char* fileName) {
 
     if(docXML.LoadFile(fileName) == 0){
         element = docXML.FirstChildElement("scene")->FirstChildElement("lights");
-        if(element)
-            parse_lights(element,group);
-
+        if(element) {
+            parse_lights(element, group);
+        }
         element = docXML.FirstChildElement("scene")->FirstChildElement("group");
         find_elements(element,group);
     }

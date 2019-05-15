@@ -126,7 +126,6 @@ void Shape::draw(){
 
     material->draw();
 
-
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
     //Set the Vertex Pointer to the vertex buffer
     glVertexPointer(3, GL_FLOAT, 0, 0);
@@ -143,7 +142,10 @@ void Shape::draw(){
     }
 
     //Draw all Triangles at once
+    glEnable(GL_LIGHTING);
     glDrawArrays(GL_TRIANGLES, 0, vertexes.size()*3);
+    glDisable(GL_LIGHTING);
+
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
