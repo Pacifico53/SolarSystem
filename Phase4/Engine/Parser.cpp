@@ -83,7 +83,7 @@ void parse_material(XMLElement* element, Shape* shape){
     element->QueryFloatAttribute("ambG", &amb[1]);
     element->QueryFloatAttribute("ambB", &amb[2]);
 
-    element->QueryFloatAttribute("shini", &shin);
+    element->QueryFloatAttribute("shiny", &shin);
 
     Material* m = new Material(diff, amb, spec, emi, shin);
     shape->setMaterial(m);

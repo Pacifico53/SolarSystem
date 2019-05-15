@@ -123,6 +123,10 @@ void Shape::setUp(){
 }
 
 void Shape::draw(){
+
+    material->draw();
+
+
     glBindBuffer(GL_ARRAY_BUFFER, buffer[0]);
     //Set the Vertex Pointer to the vertex buffer
     glVertexPointer(3, GL_FLOAT, 0, 0);

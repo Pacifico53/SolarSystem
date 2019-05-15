@@ -109,6 +109,11 @@ void render(Group* g){
     float x, y, z;
     glPushMatrix();
 
+    vector<Light*> lights = g->getLights();
+    for(auto &light: lights){
+        light->render();
+    }
+
     vector<Action*> actions = g->getActions();
     for(auto &action : actions){
         action->apply();
@@ -165,8 +170,13 @@ void renderScene() {
         glVertex3f(0.0, 0.0, 10.0 + az);
     glEnd();
 
+
     // Draw shapes
+
+    glEnable(GL_LIGHTING);
     render(scene);
+    glDisable(GL_LIGHTING);
+
     displayFPS();
 
     // End of frame
@@ -239,6 +249,7 @@ int main(int argc, char **argv) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
     glEnable(GL_TEXTURE_2D);
+    glEnable(GL_LIGHT0);
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_NORMAL_ARRAY);
     glEnableClientState(GL_TEXTURE_COORD_ARRAY);
