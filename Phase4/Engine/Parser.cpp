@@ -212,4 +212,3 @@ Group* parseXML(char* fileName) {
 
     return group;
 }
-
